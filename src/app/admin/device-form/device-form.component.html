@@ -1,0 +1,24 @@
+<form [formGroup]="deviceForm" (ngSubmit)="submitForm()">
+  <label for="name">Tên thiết bị:</label>
+  <input id="name" formControlName="name" required />
+  <div *ngIf="deviceForm.get('name')?.invalid && deviceForm.get('name')?.touched">
+    <small>Tên thiết bị phải có ít nhất 3 ký tự</small>
+  </div>
+
+  <label for="description">Mô tả:</label>
+  <input id="description" formControlName="description" required />
+  <div *ngIf="deviceForm.get('description')?.invalid && deviceForm.get('description')?.touched">
+    <small>Mô tả phải có ít nhất 5 ký tự</small>
+  </div>
+
+  <label for="status">Trạng thái:</label>
+  <select id="status" formControlName="status" required style="height: 30px;">
+    <option value="active">Active</option>
+    <option value="inactive">Inactive</option>
+  </select>
+  <div *ngIf="deviceForm.get('status')?.invalid && deviceForm.get('status')?.touched">
+    <small>Chỉ chấp nhận Active hoặc Inactive</small>
+  </div>
+
+  <button type="submit" [disabled]="deviceForm.invalid">Cập nhật</button>
+</form>

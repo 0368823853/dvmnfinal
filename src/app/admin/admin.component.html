@@ -1,0 +1,18 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened>
+    <mat-toolbar class="menu-header">Hệ Thống Quản Lý</mat-toolbar>
+    <mat-nav-list>
+      <ng-container *ngFor="let item of menuItem">
+        <a mat-list-item (click)="navigate(item.route)">
+          <mat-icon class="menu-icon">{{ item.icon }}</mat-icon>
+          <span>{{ item.title }}</span>
+        </a>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+  
+  
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
