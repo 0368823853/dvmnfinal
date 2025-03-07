@@ -1,24 +1,56 @@
-<form [formGroup]="deviceForm" (ngSubmit)="submitForm()">
-  <label for="name">Tên thiết bị:</label>
-  <input id="name" formControlName="name" required />
-  <div *ngIf="deviceForm.get('name')?.invalid && deviceForm.get('name')?.touched">
-    <small>Tên thiết bị phải có ít nhất 3 ký tự</small>
-  </div>
+<mat-dialog-content>
+<mat-card class="device-form-card">
+  <mat-card-title style="padding-bottom: 20px;">Quản lý thiết bị</mat-card-title>
 
-  <label for="description">Mô tả:</label>
-  <input id="description" formControlName="description" required />
-  <div *ngIf="deviceForm.get('description')?.invalid && deviceForm.get('description')?.touched">
-    <small>Mô tả phải có ít nhất 5 ký tự</small>
-  </div>
+  <form [formGroup]="deviceForm" (ngSubmit)="submitForm()">
 
-  <label for="status">Trạng thái:</label>
-  <select id="status" formControlName="status" required style="height: 30px;">
-    <option value="active">Active</option>
-    <option value="inactive">Inactive</option>
-  </select>
-  <div *ngIf="deviceForm.get('status')?.invalid && deviceForm.get('status')?.touched">
-    <small>Chỉ chấp nhận Active hoặc Inactive</small>
-  </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Tên thiết bị</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="deviceForm.controls['name'].hasError('required')">
+        Tên thiết bị không được để trống
+      </mat-error>
+      <mat-error *ngIf="deviceForm.controls['name'].hasError('minlength')">
+        Tên thiết bị phải có ít nhất 3 ký tự
+      </mat-error>
+    </mat-form-field>
 
-  <button type="submit" [disabled]="deviceForm.invalid">Cập nhật</button>
-</form>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Mô tả</mat-label>
+      <input matInput formControlName="description" />
+      <mat-error *ngIf="deviceForm.controls['description'].hasError('required')">
+        Mô tả không được để trống
+      </mat-error>
+      <mat-error *ngIf="deviceForm.controls['description'].hasError('minlength')">
+        Mô tả phải có ít nhất 5 ký tự
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+      <mat-label>Trạng thái</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="active">Active</mat-option>
+        <mat-option value="inactive">Inactive</mat-option>
+      </mat-select>
+      <mat-error *ngIf="deviceForm.controls['status'].hasError('required')">
+        Trạng thái không được để trống
+      </mat-error>
+      <mat-error *ngIf="deviceForm.controls['status'].hasError('pattern')">
+        Trạng thái chỉ được là "active" hoặc "inactive"
+      </mat-error>
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="deviceForm.invalid">
+      {{ isEditMode ? 'Cập nhật' : 'Thêm mới' }}
+    </button>
+
+  </form>
+</mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions>
+

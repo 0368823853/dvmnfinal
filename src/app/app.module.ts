@@ -13,10 +13,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { FormsModule } from '@angular/forms';
+import { UnauthorizedDialogComponent } from './guards/unauthorized-dialog/unauthorized-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UnauthorizedDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import { FormsModule } from '@angular/forms';
     MatToolbarModule,
     HttpClientModule,
     AuthModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

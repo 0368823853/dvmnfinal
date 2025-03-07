@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     FormsModule, ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatGridListModule
+    MatGridListModule, 
+    MatCardModule
   ]
 })
 export class AuthModule { }

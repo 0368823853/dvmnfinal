@@ -5,7 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate:[AuthGuard], data:{role: 'ROLE_ADMIN'} },
+  { path: 'dashboard', loadChildren: () => import('./admin/dashboard.module').then(m => m.AdminModule), canActivate:[AuthGuard], data:{role: 'ROLE_ADMIN'} },
   { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule), canActivate:[AuthGuard] , data:{role: 'ROLE_USER'} },
   // { path: 'devices', component: DeviceListComponent}
 ];

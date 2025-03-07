@@ -1,71 +1,75 @@
 /* Bọc toàn bộ bảng */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  /* Header bảng */
-  thead {
-    background: #1976d2; /* Màu xanh Material */
-    color: white;
-    text-transform: uppercase;
-  }
-  
-  th {
-    padding: 12px;
-    text-align: left;
-  }
-  
-  /* Dòng dữ liệu */
-  td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  /* Hover dòng */
-  tr:hover {
-    background: #f5f5f5;
-    transition: 0.3s;
-  }
-  
-  /* Ô tìm kiếm */
-  input[type="text"] {
-    width: 250px;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-  }
-  
-  input[type="text"]:focus {
-    border-color: #1976d2;
-  }
-  
-  /* Nút search */
-  button {
-    padding: 8px 12px;
-    background: #1976d2;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 8px;
-  }
-  
-  button:hover {
-    background: #1565c0;
-  }
-  
-  /* Khi không có dữ liệu */
-  .ng-template {
-    text-align: center;
-    font-size: 16px;
-    color: #888;
-    padding: 20px;
-  }
-  
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Header bảng */
+thead {
+  background: #1976d2; /* Màu xanh Material */
+  color: white;
+  text-transform: uppercase;
+}
+
+th {
+  padding: 12px;
+  text-align: left;
+}
+
+/* Dòng dữ liệu */
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Hover dòng */
+tr:hover {
+  background: #f5f5f5;
+  transition: 0.3s;
+}
+
+/* Ô tìm kiếm */
+input[type="text"] {
+  width: 250px;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: #1976d2;
+}
+
+/* Nút search */
+button {
+  padding: 8px 12px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+button:hover {
+  background: #1565c0;
+}
+
+/* Khi không có dữ liệu */
+.ng-template {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
+  padding: 20px;
+}
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin: 10px;
+}

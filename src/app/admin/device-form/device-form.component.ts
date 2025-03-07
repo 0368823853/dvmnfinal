@@ -1,7 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DeviceService } from '../../service/device.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Device } from '../../models/device.model';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-device-form',
@@ -9,65 +12,61 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './device-form.component.html',
   styleUrls: ['./device-form.component.css']
 })
-export class DeviceFormComponent {
-  @Output() deviceAdded = new EventEmitter<void>(); // Phát sự kiện khi thêm thiết bị thành công
+export class DeviceFormComponent implements OnInit{
   deviceForm: FormGroup;
-  deviceId: string | null = null;
+  isEditMode = false;
 
-  constructor(private fb: FormBuilder, private deviceService: DeviceService, private router: Router, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private deviceService: DeviceService, private router: Router, private route: ActivatedRoute, private dialogRef: MatDialogRef<DeviceFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.isEditMode = !! data; // Nếu có data -> Chỉnh sửa, không có -> Thêm mới
     this.deviceForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      description: ['', [Validators.required, Validators.minLength(5)]],
-      status: ['', [Validators.required, Validators.pattern('^(active|inactive)$')]]
+      name: [data?.device?.name || '', [Validators.required, Validators.minLength(3)]],
+      description: [data?.device?.description || '', [Validators.required, Validators.minLength(5)]],
+      status: [data?.device?.status ||'', [Validators.required, Validators.pattern('^(active|inactive)$')]]
     });
   }
 
   ngOnInit(): void {
-    this.deviceId = this.route.snapshot.paramMap.get('id');
+  }
 
-    // Nhận dữ liệu từ danh sách (nếu có)
-    const state = history.state.deviceData;
-    if (state) {
-      this.deviceForm.patchValue(state);
-    } else if (this.deviceId) {
-      // Nếu không có, gọi API lấy dữ liệu
-      this.deviceService.getDeviceById(this.deviceId).subscribe(device => {
-        this.deviceForm.patchValue(device);
-      });
-    }
+  addDevice(){
+    this.deviceService.addDevice(this.deviceForm.value).subscribe({
+      next: () => {
+        alert('Add Device Successfull!');
+        this.dialogRef.close('success'); 
+      },
+      error: (err) => {
+        this.authService.handleUnauthorizadError(err);
+        alert('Lỗi khi thêm thiết bị');
+      }
+    });
+  }
+  updateDevice(){
+
+    this.deviceService.updateDevice(this.data.device.id, this.deviceForm.value).subscribe({
+      next: () => {
+        alert('Update Device Successfull!');
+        this.dialogRef.close('success'); // Cập nhật thành công
+      },
+      error: (err) => {
+        this.authService.handleUnauthorizadError(err);
+        alert('Lỗi khi cập nhật thiết bị:');
+      }
+    });
   }
 
   submitForm() {
-    if (this.deviceId) {
-      this.deviceService.updateDevice(this.deviceId, this.deviceForm.value).subscribe({
-        next: (response) => {
-          console.log('phan hoi tu api: ', response);
-          alert('Cập nhật thành công!');
-          this.router.navigate(['/admin/devices']);
-        },
-        error: err => {
-          console.error('Loi cao nhat thiet bi', err);
-          alert('co loi xay ra khi cap nhat');
-        }
-      });
-
-    } else if (this.deviceForm.valid) {
-      console.log('Dữ liệu hợp lệ:', this.deviceForm.value);
-
-      this.deviceService.addDevice(this.deviceForm.value).subscribe({
-        next: (response) => {
-          console.log('Thêm thiết bị thành công: ', response);
-          this.deviceForm.reset(); // Reset form
-          this.deviceAdded.emit(); // Phát sự kiện cập nhật danh sách
-          this.router.navigate(['/admin/devices'])
-        },
-        error: (error) => {
-          console.error('Lỗi khi thêm thiết bị: ', error);
-        }
-      });
-    } else {
-      console.log('Form chưa hợp lệ!');
+    if (this.deviceForm.valid) {
+      if(this.isEditMode){
+        this.updateDevice();
+      }else{
+        this.addDevice();
+      }
     }
-    
+
+  }
+  closeDialog(){
+    this.dialogRef.close();
   }
 }

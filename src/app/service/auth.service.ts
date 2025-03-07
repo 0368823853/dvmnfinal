@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { Observable } from 'rxjs';
+import { AppConstants } from '../models/app-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080';
   private tokenkey = 'jwtToken';
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -41,7 +41,7 @@ export class AuthService {
   } 
 
   login(username: string, password: string): Observable<string>{
-    return this.http.post(this.apiUrl+'/user/login',{ username, password}, { responseType: 'text' });
+    return this.http.post(`${AppConstants.apiUrl}/user/login`,{ username, password}, { responseType: 'text' });
   }
 
   logout(){
@@ -50,6 +50,13 @@ export class AuthService {
   }
 
   register(Users: any): Observable<any>{
-    return this.http.post(this.apiUrl+'/user/register', Users);
+    return this.http.post(`${AppConstants.apiUrl}/user/register`, Users);
+  }
+
+  handleUnauthorizadError(error: any){
+    if(error.status === 401){
+      alert('Phiên đăng nhập hết hạn, vui lòng đăng nhập lại');
+      this.router.navigate(['/auth']);
+    }
   }
 }
