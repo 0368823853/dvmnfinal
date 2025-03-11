@@ -21,8 +21,8 @@ export class DeviceService {
   
 
   // Lấy danh sách thiết bị
-  getDevices(): Observable<Device[]> {
-    return this.http.get<Device[]>(`${AppConstants.apiUrl}/device`, { headers: this.getAuthHeaders() });
+  getDevices(searchText: string = ''): Observable<Device[]> {
+    return this.http.get<Device[]>(`${AppConstants.apiUrl}/device?searchText=${encodeURIComponent(searchText)}`, { headers: this.getAuthHeaders() });
   }
 
   // Thêm thiết bị

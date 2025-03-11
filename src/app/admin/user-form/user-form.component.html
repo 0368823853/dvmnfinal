@@ -1,11 +1,11 @@
 <mat-dialog-content>
     <mat-card class="device-form-card">
       <mat-card-title style="padding-bottom: 20px;">Quản lý User</mat-card-title>
-    
+
       <form [formGroup]="userForm">
-    
+
         <mat-form-field appearance="outline">
-          <mat-label>Username</mat-label>
+          <mat-label>Username</mat-label> 
           <input matInput formControlName="username" />
           <mat-error *ngIf="userForm.controls['username'].hasError('required')">
             Tên User không được để trống
@@ -14,16 +14,16 @@
             Tên User phải có ít nhất 3 ký tự
           </mat-error>
         </mat-form-field>
-    
-    
+
+
         <mat-form-field appearance="outline">
           <mat-label>Fullname</mat-label>
           <input matInput formControlName="fullname" />
           <mat-error *ngIf="userForm.controls['fullname'].hasError('required')">
-            fullname không được để trống
+            Fullname không được để trống
           </mat-error>
           <mat-error *ngIf="userForm.controls['fullname'].hasError('minlength')">
-            fullname phải có ít nhất 5 ký tự
+            Fullname phải có ít nhất 5 ký tự
           </mat-error>
         </mat-form-field>
 
@@ -33,12 +33,13 @@
             <mat-error *ngIf="userForm.controls['email'].hasError('required')">
               Email không được để trống
             </mat-error>
+          <!--TODO: HoanNTh Chỗ có dấu, chỗ k dấu không đồng nhất -->
             <mat-error *ngIf="userForm.controls['email'].hasError('email')">
-              Nhap dung email
+              vui lòng nhập đúng email!
             </mat-error>
           </mat-form-field>
-    
-    
+
+
         <mat-form-field appearance="outline">
           <mat-label>Role</mat-label>
           <mat-select formControlName="role">
@@ -52,15 +53,15 @@
             Role chỉ được là "ADMIN" hoặc "USER"
           </mat-error>
         </mat-form-field>
-    
+
       </form>
     </mat-card>
     </mat-dialog-content>
+<!--TODO: HoanNTh: Nút hủy và cập nhật không có lề, đồng nhất text trong menu, các dialog, chỗ tiếng anh chỗ tiếng việt -->
     <mat-dialog-actions align="end">
-        <button mat-button (click)="closeDialog()">Hủy</button>
+        <button mat-button (click)="closeDialog()">Cancel</button>
         <button mat-button color="primary" (click)="updateUser()" [disabled]="userForm.invalid">
-          Cập Nhật
+          Update
         </button>
       </mat-dialog-actions>
-    
-    
+

@@ -41,12 +41,12 @@ export class UserFormComponent implements OnInit{
     if(this.userForm.valid){
       this.userService.updateUser(this.data.user.id, this.userForm.value).subscribe({
         next: ()=>{
-          alert('Update User Success');
+          alert('Cập nhật người dùng thành công!');
           this.dialogRef.close('success');
         },
         error:(err)=>{
           this.authService.handleUnauthorizadError(err);
-          alert('Error update user');
+          alert('Lỗi Cập nhật người dùng!');
           console.error(err);
         }
       })

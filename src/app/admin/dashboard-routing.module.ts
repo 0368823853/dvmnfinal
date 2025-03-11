@@ -14,7 +14,7 @@ const routes: Routes = [
       {path: 'devices', component: DeviceListComponent},
       {path: 'device-form', component: DeviceFormComponent},
       {path: 'device-form/update/:id', component: DeviceFormComponent},
-      {path: 'user', component: UserListComponent},
+      {path: 'user-management', component: UserListComponent},
       {path: 'user-form/user/:id', component:UserFormComponent},
       {path: 'my-device', component:MyDeviceComponent},
       {path: 'admin-assignment', component: AdminAssignmentComponent}

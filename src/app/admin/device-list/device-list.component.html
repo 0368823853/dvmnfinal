@@ -1,66 +1,26 @@
 
-    <mat-label style="margin-right: 10px;">Tìm kiếm thiết bị:</mat-label>
-    <input matInput type="text" [(ngModel)]="searchText" placeholder="Nhập tên thiết bị...">
-  <button mat-raised-button color="primary" (click)="searchName()">Tìm kiếm</button>
-  <button mat-raised-button color="primary" (click)="goToAddDevice()" style="margin: 20px;">Thêm Thiết Bị</button>
-  <mat-form-field appearance="outline">
-    <mat-label>Chọn trạng thái</mat-label>
-    <mat-select [(value)]="selectedStatus" (selectionChange)="filterDevicesByStatus()">
-      <mat-option *ngFor="let status of statuses" [value]="status">{{ status }}</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-label style="margin-right: 10px;">Search Device:</mat-label>
+    <input matInput type="text" [(ngModel)]="searchText" placeholder="Input the device name...">
+  <button mat-raised-button color="primary" (click)="searchName()">Search</button>
+  <button mat-raised-button color="primary" (click)="goToAddDevice()" style="margin: 30px;">Add Device</button>
+
+  <label for="status">Select status:</label>
+  <select id="status" [(ngModel)]="selectedStatus" (change)="filterDevicesByStatus()">
+    <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+  </select>
 
   <table *ngIf="(filteredDevices$ | async) as devices; else noData">
-    <thead>
-      <tr>
-        <th>STT</th>
-        <th>Tên Thiết Bị</th>
-        <th>Mô Tả</th>
-        <th>Trạng Thái</th>
-        <th>Ngày nhập</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let device of devices; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ device.name }}</td>
-        <td>{{ device.description }}</td>
-        <td>{{ device.status }}</td>
-        <td>{{ device.createdAt | date:'dd/MM/yyyy hh:mm' }}</td>
-        <td>
-          <button mat-icon-button (click)="selectDevice(device)">
-            <mat-icon>edit</mat-icon>
-          </button>
-        </td>
-        <td>
-          <button mat-icon-button (click)="confirmDelete(device.id)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-        <td *ngIf="device.status === 'active'">
-          <label for="userSelect">Chọn User:</label>
-          <select id="userSelect" [(ngModel)]="selectedUserId">
-            <ng-container *ngFor="let user of users">
-              <option *ngIf="user.role === 'USER'" [value]="user.id">
-                {{ user.username }}
-              </option>
-            </ng-container>
-          </select>
-        
-          <mat-error *ngIf="errorMessage[device.id]">
-            {{ errorMessage[device.id] }}
-          </mat-error>
-        
-          <button (click)="assignDeviceToUser(device.id)">Gán Thiết Bị</button>
-        </td>
-        
-        
-      </tr>
-    </tbody>
-  </table>
+  <app-shared-table
+  [displayedColumns]="columns"
+  [dataSource]="devices"
+  [cellActions]="config">
+</app-shared-table>
+</table>
+
+
   
   <ng-template #noData>
-    <p>Không có thiết bị nào.</p>
+    <p>Device Not Found</p>
   </ng-template>
 
   <!-- <div *ngIf="selectedDevice">

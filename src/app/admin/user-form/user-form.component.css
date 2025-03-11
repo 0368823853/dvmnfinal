@@ -17,8 +17,20 @@
   }
   
   button {
-    width: 50%;
+    width: 30%;
     padding: 10px;
     font-size: 16px;
+    margin-left: 20px;
+    margin-right: 30px;
   }
+  mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* Tạo khoảng cách giữa các nút */
+    padding: 16px; 
+  }
+  button {
+    min-width: 80px; 
+  }
+  
   

@@ -1,33 +1,34 @@
 <div class="register-card">
-    <label>Đăng ký</label>
+    <label>Register</label>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <mat-form-field>
-        <mat-label>Tên đăng nhập</mat-label>
+        <mat-label>Username</mat-label>
         <input matInput formControlName="username">
         <mat-error *ngIf="registerForm.controls['username'].hasError('required')">Vui lòng nhập tên đăng nhập</mat-error>
       </mat-form-field>
-  
+
       <mat-form-field>
-        <mat-label>Mật khẩu</mat-label>
+        <mat-label>Password</mat-label>
         <input matInput type="password" formControlName="password">
-        <mat-error *ngIf="registerForm.controls['password'].hasError('required')">Vui long nhap password</mat-error>
+        <!--TODO: HoanNTh: Chỗ có dấu, chỗ k dấu không đồng nhất-->
+        <mat-error *ngIf="registerForm.controls['password'].hasError('required')">Vui lòng nhập pasword</mat-error>
         <mat-error *ngIf="registerForm.controls['password'].hasError('minlength')">Mật khẩu ít nhất 6 ký tự</mat-error>
       </mat-form-field>
-  
+
       <mat-form-field>
-        <mat-label>Họ và tên</mat-label>
+        <mat-label>Fullname</mat-label>
         <input matInput formControlName="fullname">
         <mat-error *ngIf="registerForm.controls['fullname'].hasError('required')">Vui lòng nhập họ tên</mat-error>
       </mat-form-field>
-  
+
       <mat-form-field>
         <mat-label>Email</mat-label>
         <input matInput formControlName="email">
-        <mat-error *ngIf="registerForm.controls['email'].hasError('required')">Email không duoc de chong</mat-error>
+        <!--TODO: HoanNTh: Chỗ có dấu, chỗ k dấu không đồng nhất-->
+        <mat-error *ngIf="registerForm.controls['email'].hasError('required')">Email không được để trống</mat-error>
         <mat-error *ngIf="registerForm.controls['email'].hasError('email')">Email không hợp lệ</mat-error>
       </mat-form-field>
-  
-      <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Đăng ký</button>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Register</button>
     </form>
   </div>
-  

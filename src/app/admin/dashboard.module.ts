@@ -9,7 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
+import { MatCellDef, MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,6 +25,8 @@ import { MatIconButton } from '@angular/material/button';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { MyDeviceComponent } from './my-device/my-device.component';
 import { AdminAssignmentComponent } from './admin-assignment/admin-assignment.component';
+import { SharedTableComponent } from './shared-table/shared-table.component';
+import { AssignUserDialogComponent } from './assign-user-dialog/assign-user-dialog.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { AdminAssignmentComponent } from './admin-assignment/admin-assignment.co
     PasswordChangeComponent,
     MyDeviceComponent,
     AdminAssignmentComponent,
+    SharedTableComponent,
+    AssignUserDialogComponent
   ],
   imports: [
     CommonModule,
@@ -59,4 +63,4 @@ import { AdminAssignmentComponent } from './admin-assignment/admin-assignment.co
     MatIconButton
   ]
 })
-export class AdminModule { }
+export class DashboardModule { }

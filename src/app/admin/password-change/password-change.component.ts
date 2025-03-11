@@ -9,6 +9,8 @@ import { MatDialogRef } from '@angular/material/dialog';
   templateUrl: './password-change.component.html',
   styleUrl: './password-change.component.css'
 })
+
+//TODO: HoanNTh: rà soát text trong alert của toàn bộ project, chỗ viết hoa, chỗ viết thường chỗ thì không dấu
 export class PasswordChangeComponent {
 
   passwordForm: FormGroup;
@@ -26,25 +28,25 @@ export class PasswordChangeComponent {
 
   updatePassword(){
     if(this.passwordForm.invalid){
-      alert('vui long dien day du thong tin');
+      alert('Vui lòng điền đầy đủ thông tin');
       return;
     }
 
     const{oldPassword, newPassword, confirmPassword} = this.passwordForm.value;
 
     if(newPassword !== confirmPassword){
-      alert('Mat khau moi khong khop');
+      alert('Mật khẩu mới không khớp');
       return;
     }
 
     this.userService.updatePassword({oldPassword, newPassword}).subscribe({
       next:()=>{
-        alert('Cap nhat mat khau thanh cong');
+        alert('Cập nhật mật khẩu thành công');
         this.passwordForm.reset;
         this.dialogRef.close();
       },
       error: () => {
-        alert('Vui long kiem tra lai mat khau');
+        alert('Vui lòng kiểm tra lại mật khẩu');
       }
     });
   }

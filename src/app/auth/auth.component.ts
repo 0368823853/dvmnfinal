@@ -27,18 +27,9 @@ export class AuthComponent {
     //đăng ký (subscribe) vào Observable để nhận dữ liệu khi API trả ve
     this.authService.login(this.username, this.password).subscribe({
       next:(token)=>{
-        console.log('Thanh cong', token);
+        //TODO: HoanNTh: Bỏ log thừa
         this.authService.saveToken(token);
         this.router.navigate(['/dashboard'])
-
-        // const role = this.authService.getUserRole();
-        // console.log('Vai tro:', role);
-        // if(role === AppConstants.ROLE_ADMIN){
-        //   this.router.navigate(['/admin']);
-
-        // }else{
-        //   this.router.navigate(['/user']);
-        // }
       },
       error: (err) => {
         alert('Sai tai khoan hoac mat khau');

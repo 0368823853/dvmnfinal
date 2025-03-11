@@ -10,42 +10,44 @@ import { AppConstants } from '../models/app-constants';
 })
 export class AuthService {
 
-  private tokenkey = 'jwtToken';
+  //TODO: HoanNTh: tại sao k dùng tokenKey trong app-constants.ts
+
 
   constructor(private http: HttpClient, private router: Router) { }
 
   getToken():string|null{
-    return localStorage.getItem(this.tokenkey);
+    return localStorage.getItem(AppConstants.tokenKey);
   }
 
   saveToken(token: string){
-    localStorage.setItem(this.tokenkey, token);
+    localStorage.setItem(AppConstants.tokenKey, token);
   }
 
   getUserRole(): string | null {
     const token = this.getToken();
     if (!token) return null;
-  
+
     try {
       const decoded: any = jwtDecode(token);
-      console.log('Decoded Token:', decoded); // In toàn bộ payload token để kiểm tra
+      //TODO: HoanNTh: bỏ log, chỉ để lúc test
+
       return decoded?.role || null; // Trả về role nếu có
     } catch (error) {
-      console.error('Lỗi giải mã token:', error);
+
       return null;
     }
   }
 
   isAdmin(): boolean{
     return this.getUserRole()==='ADMIN';
-  } 
+  }
 
   login(username: string, password: string): Observable<string>{
     return this.http.post(`${AppConstants.apiUrl}/user/login`,{ username, password}, { responseType: 'text' });
   }
 
   logout(){
-    localStorage.removeItem(this.tokenkey);
+    localStorage.removeItem(AppConstants.tokenKey);
     this.router.navigate(['/login'])
   }
 

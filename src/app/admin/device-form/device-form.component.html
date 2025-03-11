@@ -1,11 +1,11 @@
 <mat-dialog-content>
 <mat-card class="device-form-card">
-  <mat-card-title style="padding-bottom: 20px;">Quản lý thiết bị</mat-card-title>
+  <mat-card-title style="padding-bottom: 20px;">Device Management</mat-card-title>
 
   <form [formGroup]="deviceForm" (ngSubmit)="submitForm()">
 
     <mat-form-field appearance="outline">
-      <mat-label>Tên thiết bị</mat-label>
+      <mat-label>Name Device</mat-label>
       <input matInput formControlName="name" />
       <mat-error *ngIf="deviceForm.controls['name'].hasError('required')">
         Tên thiết bị không được để trống
@@ -17,7 +17,7 @@
 
 
     <mat-form-field appearance="outline">
-      <mat-label>Mô tả</mat-label>
+      <mat-label>Description</mat-label>
       <input matInput formControlName="description" />
       <mat-error *ngIf="deviceForm.controls['description'].hasError('required')">
         Mô tả không được để trống
@@ -29,10 +29,10 @@
 
 
     <mat-form-field appearance="outline">
-      <mat-label>Trạng thái</mat-label>
+      <mat-label>Status</mat-label>
       <mat-select formControlName="status">
-        <mat-option value="active">Active</mat-option>
-        <mat-option value="inactive">Inactive</mat-option>
+        <mat-option value="active">active</mat-option>
+        <mat-option value="inactive">inactive</mat-option>
       </mat-select>
       <mat-error *ngIf="deviceForm.controls['status'].hasError('required')">
         Trạng thái không được để trống
@@ -43,14 +43,16 @@
     </mat-form-field>
 
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="deviceForm.invalid">
-      {{ isEditMode ? 'Cập nhật' : 'Thêm mới' }}
-    </button>
+
+    <mat-dialog-actions align="end">
+      <button mat-raised-button color="primary" type="submit" [disabled]="deviceForm.invalid">
+        {{ isEditMode ? 'Update' : 'Add' }}
+      </button>
+      <button mat-button color="warn" (click)="closeDialog()">Cancel</button>
+    </mat-dialog-actions>
 
   </form>
 </mat-card>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button color="warn" (click)="closeDialog()">Cancel</button>
-</mat-dialog-actions>
+
 

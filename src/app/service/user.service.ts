@@ -18,8 +18,8 @@ export class UserService {
   }
 
   // hien thi user
-  getUser():Observable<User[]>{
-    return this.http.get<User[]>(`${AppConstants.apiUrl}/loaduser`, {headers: this.getAuthHeaders()});
+  getUser(searchText: string =''):Observable<User[]>{
+    return this.http.get<User[]>(`${AppConstants.apiUrl}/loaduser?searchText=${encodeURIComponent(searchText)}`, {headers: this.getAuthHeaders()});
   }
 
   getUserById(id: string): Observable<User>{

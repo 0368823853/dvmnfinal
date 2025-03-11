@@ -1,28 +1,10 @@
 
 <table *ngIf="(devices$ | async) as users; else noData">
-  <thead>
-    <tr>
-      <th>Tên thiết bị</th>
-      <th>Mô tả</th>
-      <th>Ngay duoc gan</th>
-      <th>Trạng thái</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let device of devices">
-      <td>{{ device.deviceName }}</td>
-      <td>{{ device.deviceStatus }}</td>
-      <td>{{ device.createdAt }}</td>
-      <td>{{ device.status }}</td>
-      <td *ngIf="device.status === 'Borrowed'">
-        <button mat-button color="warn" (click)="unassignDevice(device.id)"
-        [disabled]="device.status !== 'Borrowed'">
-  Trả thiết bị
-</button>
-
-      </td>
-    </tr>
-  </tbody>
+  <app-shared-table
+  [displayedColumns]="columns"
+  [dataSource]="devices"
+  [cellActions]="config">
+</app-shared-table>
 </table>
 <ng-template #noData>
     <p>Device NotFound</p>

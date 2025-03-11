@@ -18,7 +18,7 @@ export class AdminComponent{
   menuItems = [
     { title: 'Dashboard', icon: 'home', route: 'dashboard', roles: ['ROLE_ADMIN', 'ROLE_USER'] },
     { title: 'Device Management', icon: 'devices', route: 'dashboard/devices', roles: ['ROLE_ADMIN'] },
-    { title: 'User Management', icon: 'person', route: 'dashboard/user', roles: ['ROLE_ADMIN'] },
+    { title: 'User Management', icon: 'person', route: 'dashboard/user-management', roles: ['ROLE_ADMIN'] },
     { title: 'Device Assignment', icon: 'assignment', route: 'dashboard/admin-assignment', roles: ['ROLE_ADMIN'] },
     { title: 'My Device', icon: 'inventory', route: 'dashboard/my-device', roles: ['ROLE_USER']}
   ];

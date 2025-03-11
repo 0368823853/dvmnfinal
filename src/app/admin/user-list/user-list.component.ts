@@ -6,6 +6,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { UserFormComponent } from '../user-form/user-form.component';
 import { AuthService } from '../../service/auth.service';
+import { CellAction } from '../shared-table/shared-table.component';
+import { AppConstants } from '../../models/app-constants';
 
 @Component({
   selector: 'app-user-list',
@@ -20,7 +22,11 @@ export class UserListComponent implements OnInit{
   searchText: string='';
   users$ = new BehaviorSubject<User[]>([]);
   selectedRole: string ='';
-  roles: string[] = ['ADMIN', 'USER'];
+  //TODO: HoanNTh: để hằng số
+  roles: string[] = [AppConstants.ROLES.ADMIN, AppConstants.ROLES.USER];
+
+  columns = ['username','role', 'fullname', 'email', 'createdAt'];
+  config: Array<CellAction>;
 
 
   constructor(
@@ -29,34 +35,31 @@ export class UserListComponent implements OnInit{
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private authService: AuthService
-  ){}
+  ){
+    this.config = [
+      {
+        name: 'Edit',
+        icon: 'edit',
+        onAction: (user: User)=> this.selectUser(user)
+      },
+      {
+        name: 'Delete',
+        icon: 'delete',
+        onAction: (user: User)=> this.confirmDelete(user.id)
+      }
+    ]
+  }
 
   ngOnInit(): void {
-      this.loadUser(); 
+      this.loadUser();
   }
 
-  applySearch() {
-    const searchText = this.searchText.trim().toLowerCase();
-  
-    if (!searchText) {
-      this.users$.next(this.users); // Nếu không có từ khóa, hiển thị tất cả
-    } else {
-      const filtered = this.users.filter(user =>
-        user.fullname.toLowerCase().includes(searchText) ||
-        user.username.toLowerCase().includes(searchText) ||
-        user.email.toLowerCase().includes(searchText)
-      );
-  
-      this.users$.next(filtered);
-    }
-  }
-  
 
   loadUser(){
-    this.userService.getUser().subscribe({
+    this.userService.getUser(this.searchText).subscribe({
       next: (data) => {
         this.users = data; // Lưu danh sách gốc
-        this.applySearch(); // Áp dụng tìm kiếm nếu có searchText
+        this.users$.next(this.users)
       },
       error: (err) => {
         this.authService.handleUnauthorizadError(err);
@@ -64,13 +67,16 @@ export class UserListComponent implements OnInit{
     });
   }
 
+  navigate(route: string) {
+    this.router.navigate([route]);
+  }
+
   searchName() {
     this.userService.searchUser(this.searchText).subscribe({
       next: (data) => {
         this.users = data;
         this.users$.next(data);
-        console.log('search:', this.users);
-  
+
         // Cập nhật query params trên URL
         this.router.navigate([], {
           queryParams: { searchText: this.searchText },
@@ -97,26 +103,25 @@ export class UserListComponent implements OnInit{
 
   confirmDelete(id: string) {
     const userToDelete = this.users.find(user => user.id === id); // Tìm user theo ID
-    
+
     if (!userToDelete) {
       alert('Lỗi: Không tìm thấy user để xóa!');
       return;
     }
-  
+
     if (userToDelete.role === 'ADMIN') {
       alert('Không thể xóa ADMIN!');
       return;
     }
-  
+
     if (confirm('Bạn có chắc chắn muốn xóa user này không?')) {
       this.userService.deleteUser(id).subscribe({
         next: () => {
-          alert('Delete User Successfull!');
+          alert('Xóa user thành công!');
           this.loadUser();
         },
         error: (err) => {
           this.authService.handleUnauthorizadError(err);
-          console.error('Error delete User', err);
           alert('Xóa user thất bại!');
         }
       });
@@ -134,6 +139,6 @@ export class UserListComponent implements OnInit{
       }
     )
   }
-  
+
 
 }

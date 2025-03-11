@@ -4,6 +4,7 @@ import { DeviceAssignmentService } from '../../service/device-assignment.service
 import { DeviceAssignment } from '../../models/deviceassignment.model';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { CellAction } from '../shared-table/shared-table.component';
 
 @Component({
   selector: 'app-my-device',
@@ -15,12 +16,20 @@ export class MyDeviceComponent implements OnInit{
 
   devices: DeviceAssignment[]=[];
   devices$ = new BehaviorSubject<DeviceAssignment[]>([]);
+  config: Array<CellAction>;
+  columns =['deviceName','deviceStatus','createdAt','status'];
 
   constructor(private deviceAssignmentService: DeviceAssignmentService,
     private router: Router,
     private authService: AuthService
   ) {
-    
+    this.config = [
+      {
+        name: 'Return',
+        icon: 'keyboard_return',
+        onAction:(device: DeviceAssignment) => this.unassignDevice(device.id)
+      }
+    ]
   }
 
   ngOnInit(): void {
@@ -42,12 +51,12 @@ export class MyDeviceComponent implements OnInit{
     if(confirm("Bạn có chắc chắn muốn trả thiết bị này không?")){
       this.deviceAssignmentService.unAssignment(deviceAssignmentId).subscribe({
         next: ()=>{
-          alert('Tra thiet bi thanh cong');
+          alert('Trả thiết bị thành công!');
           this.loadDevices();
         },
         error: (err)=>{
           this.authService.handleUnauthorizadError(err);
-          alert('Loi'+ err.error);
+          alert('Thiết bị đã được trả, đang chờ xác nhận');
         }
       })
     }

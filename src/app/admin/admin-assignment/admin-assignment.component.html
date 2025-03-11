@@ -1,34 +1,14 @@
-<mat-label style="margin-right: 10px;">Tìm kiếm thiết bị:</mat-label>
-<input matInput type="text" [(ngModel)]="searchText" placeholder="Nhập tên thiết bị...">
-<button mat-raised-button color="primary" (click)="searchName()">Tìm kiếm</button>
+<mat-label style="margin-right: 10px;">Search Device:</mat-label>
+<input matInput type="text" [(ngModel)]="searchText" placeholder="Input the device name...">
+<button mat-raised-button color="primary" (click)="searchName()">Search</button>
 <table *ngIf="(devices$ | async) as users; else noData">
-    <thead>
-      <tr>
-        <th>STT</th>
-        <th>Name Device</th>
-        <th>Status Device</th>
-        <th>CreatedAt</th>
-        <th>ConfirmAt</th>
-        <th>Status Assignment</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let device of devices; let i = index">
-        <td>{{ i+1}}</td>
-        <td>{{ device.deviceName }}</td>
-        <td>{{ device.deviceStatus }}</td>
-        <td>{{ device.createdAt }}</td>
-        <td>{{ device.confirmAt}}</td>
-        <td>{{ device.status }}</td>
-        <td *ngIf="device.status === 'Returned'">
-          <button mat-button color="warn" (click)="conrfimAssignDevice(device.id)"
-          [disabled]="device.status !== 'Returned'">
-    Xac nhan
-  </button>
-  
-        </td>
-      </tr>
-    </tbody>
+
+  <app-shared-table
+  [displayedColumns]="columns"
+  [dataSource]="devices"
+  [cellActions]="config">
+</app-shared-table>
+
   </table>
   <ng-template #noData>
       <p>Device NotFound</p>

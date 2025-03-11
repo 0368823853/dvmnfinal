@@ -3,6 +3,11 @@ export class AppConstants{
 
     static readonly tokenKey = 'jwtToken';
 
+    static readonly ROLES = {
+      ADMIN: 'ADMIN',
+      USER: 'USER'
+    };
+
     static readonly ROLE_ADMIN = 'ROLE_ADMIN';
     static readonly ROLE_USER = 'ROLE_USER';
 

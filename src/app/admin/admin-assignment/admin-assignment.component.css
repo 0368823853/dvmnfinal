@@ -1,4 +1,4 @@
-/* Bọc toàn bộ bảng */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -8,9 +8,9 @@ table {
     overflow: hidden;
   }
   
-  /* Header bảng */
+
   thead {
-    background: #1976d2; /* Màu xanh Material */
+    background: #1976d2; 
     color: white;
     text-transform: uppercase;
   }
@@ -20,19 +20,19 @@ table {
     text-align: left;
   }
   
-  /* Dòng dữ liệu */
+
   td {
     padding: 12px;
     border-bottom: 1px solid #ddd;
   }
   
-  /* Hover dòng */
+
   tr:hover {
     background: #f5f5f5;
     transition: 0.3s;
   }
   
-  /* Ô tìm kiếm */
+
   input[type="text"] {
     width: 250px;
     padding: 8px;
@@ -45,8 +45,7 @@ table {
   input[type="text"]:focus {
     border-color: #1976d2;
   }
-  
-  /* Nút search */
+
   button {
     padding: 8px 12px;
     background: #1976d2;
@@ -61,7 +60,7 @@ table {
     background: #1565c0;
   }
   
-  /* Khi không có dữ liệu */
+
   .ng-template {
     text-align: center;
     font-size: 16px;

@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeviceFormComponent } from '../device-form/device-form.component';
 import { User } from '../../models/user.model';
 import { UserService } from '../../service/user.service';
+import { CellAction } from '../shared-table/shared-table.component';
+import { AssignUserDialogComponent } from '../assign-user-dialog/assign-user-dialog.component';
 
 @Component({
   selector: 'app-device-list',
@@ -22,12 +24,15 @@ export class DeviceListComponent implements OnInit {
   filteredDevices$ = new BehaviorSubject<Device[]>([]); // Danh sách sau khi tìm kiếm
   errorMessage: {[deviceId: string]: string} ={};
 
+  columns =['name', 'description', 'status', 'createdAt'];
+
   device = {id:'', name: '', description: '', status: '', createdAt:''};
 
   selectedStatus: string = ''; // Trạng thái được chọn
   statuses: string[] = ['active', 'inactive']; // Các trạng thái có thể lọc
   selectedUserId: string='';
   users: User[]=[];
+  config: Array<CellAction>;
 
   constructor(
     private deviceService: DeviceService,
@@ -36,7 +41,25 @@ export class DeviceListComponent implements OnInit {
     private dialog: MatDialog,
     private userService: UserService,
     private authService: AuthService
-  ) {}
+  ) {
+    this.config = [
+      {
+        name: 'Edit',
+        icon: 'edit',
+        onAction:(device: Device)=> this.selectDevice(device)
+      },
+      {
+        name: 'Delete',
+        icon: 'delete',
+        onAction:(device: Device)=> this.confirmDelete(device.id)
+      },
+      {
+        name: 'Assignment',
+        icon: 'devices',
+        onAction:(device: Device)=> this.assignDeviceToUser(device.id)
+      }
+    ]
+  }
 
   ngOnInit(): void {
       this.loadDevices(); // Load danh sách thiết bị và thực hiện tìm kiếm nếu có searchText
@@ -45,10 +68,10 @@ export class DeviceListComponent implements OnInit {
 
   // Lấy danh sách thiết bị từ API
   loadDevices() {
-    this.deviceService.getDevices().subscribe({
+    this.deviceService.getDevices(this.searchText).subscribe({
       next: (data) => {
-        this.devices = data; // Lưu danh sách gốc
-        this.applySearch(); // Áp dụng tìm kiếm nếu có searchText
+        this.devices = data; // Lưu danh sách đã lọc từ BE
+        this.filteredDevices$.next(this.devices); // Cập nhật danh sách hiển thị
       },
       error: (err) => {
         this.authService.handleUnauthorizadError(err);
@@ -56,23 +79,12 @@ export class DeviceListComponent implements OnInit {
     });
   }
 
-  // Áp dụng tìm kiếm dựa trên searchText
-  applySearch() {
-    if (!this.searchText.trim()) {
-      this.filteredDevices$.next(this.devices); // Nếu không có từ khóa, hiển thị tất cả
-    } else {
-      const filtered = this.devices.filter(device =>
-        device.name.toLowerCase().includes(this.searchText.toLowerCase())
-      );
-      this.filteredDevices$.next(filtered);
-    }
-  }
   searchName() {
     this.deviceService.searchDevice(this.searchText).subscribe({
       next: (data) => {
         this.devices = data;
         this.filteredDevices$.next(data);
-  
+
         // Cập nhật query params trên URL
         this.router.navigate([], {
           queryParams: { searchText: this.searchText },
@@ -82,16 +94,12 @@ export class DeviceListComponent implements OnInit {
     });
   }
 
-  addDevice(newDevice: Device) {
-    this.deviceService.addDevice(newDevice).subscribe(() => {
-      this.loadDevices(); // Cập nhật danh sách sau khi thêm
-    });
-  }
 
   goToAddDevice(device?: Device){
     this.showUnauthorizedDialog();
     return false;
   }
+
   private showUnauthorizedDialog(): void {
     const dialogRef = this.dialog.open(DeviceFormComponent, {
       width: '400px',
@@ -114,19 +122,18 @@ export class DeviceListComponent implements OnInit {
         this.loadDevices();
       }
     });
-  }  
+  }
 
   confirmDelete(id: string){
     if(confirm('Bạn có chắc chắn muốn xóa thiết bị này không?')){
       this.deviceService.deleteDevice(id).subscribe({
         next: ()=>{
-          alert('Delete Device Successfull!');
+          alert('Xóa thiết bị thành công!');
           this.loadDevices();
         },
         error: (err)=>{
           this.authService.handleUnauthorizadError(err);
-          console.error('Error delete device', err);
-          alert('Error delete device');
+          alert('Lỗi khi xóa thiết bị');
         }
       });
     }
@@ -137,13 +144,14 @@ export class DeviceListComponent implements OnInit {
       this.filteredDevices$.next(this.devices);
       return;
     }
-
-    this.deviceService.filterStatus(this.selectedStatus).subscribe(
-      (filteredDevices) => {
-        console.log(filteredDevices)
+    this.deviceService.filterStatus(this.selectedStatus).subscribe({
+      next: (filteredDevices) =>{
         this.filteredDevices$.next(filteredDevices);
       },
-      (error) => console.error('Lỗi khi lọc thiết bị:', error)
+      error:(err)=>{
+        this.authService.handleUnauthorizadError(err);
+      }
+    }
     );
   }
 
@@ -156,26 +164,29 @@ export class DeviceListComponent implements OnInit {
     })
   }
 
-  assignDeviceToUser(deviceId: string){
-    if(!this.selectedUserId){
-      alert('Vui long chon user!');
-      return;
-    }
-    this.deviceService.assignDevice(deviceId, this.selectedUserId).subscribe({
-      next:()=>{
-        alert('Gan thiet bi thanh cong');
+assignDeviceToUser(deviceId: string) {
+  const dialogRef = this.dialog.open(AssignUserDialogComponent, {
+    width: '400px',
+    disableClose: true, // Không cho đóng khi chưa chọn user
+  });
+
+  dialogRef.afterClosed().subscribe(selectedUserId => {
+    if (!selectedUserId) return;
+
+    this.deviceService.assignDevice(deviceId, selectedUserId).subscribe({
+      next: () => {
+        alert('Gán thiết bị thành công!');
         this.loadDevices();
-        this.errorMessage[deviceId]='';
       },
-      error:(err)=>{
+      error: (err) => {
         this.authService.handleUnauthorizadError(err);
-        if(err.status === 500){
-          this.errorMessage[deviceId] ='User đã mượn thiết bị này';
-        }else{
-          this.errorMessage[deviceId] = 'Có lỗi xảy ra, vui lòng thử lại!';
+        if (err.status === 500) {
+          alert('User đã mượn thiết bị này');
+        } else {
+          alert('Có lỗi xảy ra, vui lòng thử lại!');
         }
       }
     });
-  }
-
+  });
+}
 }

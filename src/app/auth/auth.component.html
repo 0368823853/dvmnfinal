@@ -1,22 +1,22 @@
 <div class="login-container">
-  <mat-card-title>Đăng nhập</mat-card-title>
-    <h2>Đăng nhập</h2>
+    <h2>Login</h2>
     <form (ngSubmit)="onLogin()">
 
       <mat-form-field>
-      <mat-label for="username">Tên đăng nhập:</mat-label>
+      <mat-label for="username">Username:</mat-label>
       <input matInput type="text" id="username" [(ngModel)]="username" name="username" required>
       <mat-error *ngIf="loginForm.controls['username'].hasError('required')">Vui lòng nhập username</mat-error>
     </mat-form-field>
-        
+
     <mat-form-field>
-      <mat-label for="password">Mật khẩu:</mat-label>
+      <mat-label for="password">Password:</mat-label>
       <input matInput type="password" id="password" [(ngModel)]="password" name="password" required>
       <mat-error *ngIf="loginForm.controls['password'].hasError('required')">Vui lòng nhập username</mat-error>
     </mat-form-field>
 
-      <button mat-raised-button type="submit">Đăng nhập</button>
-      <span>Chưa có tài khoản?</span>
-      <button mat-button color="accent" (click)="navigateToRegister()">Đăng ký</button>
+      <button mat-raised-button type="submit">Login</button>
+      <!--TODO: HoanNTh: cho text bé lại -->
+      <p style="font-size: 10px; color: red;">Don't have an account yet?</p>
+      <button mat-button color="accent" (click)="navigateToRegister()">Register</button>
     </form>
   </div>

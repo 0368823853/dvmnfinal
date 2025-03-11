@@ -17,9 +17,10 @@ export class AuthGuard implements CanActivate {
   canActivate(route: any): boolean {
     const role = this.authService.getUserRole();
 
-    if (route.routeConfig.path === 'dashboard' && role === AppConstants.ROLE_ADMIN) {
+    //TODO: HoanNTh: dashboard thì không cần check role, không thấy check active navigate theo role, user thường vẫn vào được path của admin
+    if (role === AppConstants.ROLE_ADMIN) {
       return true; // Admin có quyền truy cập
-    } else if (route.routeConfig.path === 'dashboard' && role === AppConstants.ROLE_USER) {
+    } else if (role === AppConstants.ROLE_USER) {
       return true; // User có quyền truy cập
     }
 

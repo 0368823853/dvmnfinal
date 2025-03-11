@@ -1,0 +1,36 @@
+mat-table {
+    width: 100%;
+  }
+  
+  mat-header-cell {
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  mat-cell,
+  mat-header-cell {
+    padding: 8px;
+  }
+  
+  mat-icon {
+    cursor: pointer;
+    margin-right: 8px;
+    color: #007bff;
+  }
+  
+  mat-icon:hover {
+    color: #0056b3;
+  }
+  table {
+    width: 100%;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    margin: 0 5px;
+  }
+  

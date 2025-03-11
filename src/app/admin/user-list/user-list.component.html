@@ -1,43 +1,22 @@
 
 
-<mat-label style="margin-right: 10px;">Tìm kiếm nguoi dung:</mat-label>
-<input matInput type="text" [(ngModel)]="searchText" placeholder="Nhập tên thiết bị...">
+<mat-label style="margin-right: 10px;">Search User:</mat-label>
+<input matInput type="text" [(ngModel)]="searchText" placeholder="Input the user...">
 <button mat-raised-button color="primary" (click)="searchName()">Search</button>
+<button mat-raised-button color="primary" (click)="navigate('/user/register')" style="margin-right: 30px;">Create User</button>
 
-<mat-form-field appearance="outline" style="margin-left: 40px;">
-<mat-label>Chọn Role</mat-label>
-<mat-select [(value)]="selectedRole" (selectionChange)="filterUserByRole()">
-  <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
-</mat-select>
-</mat-form-field>
+<label for="status">Select Role:</label>
+<select id="status" [(ngModel)]="selectedRole" (change)="filterUserByRole()">
+  <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+</select>
 
 <table *ngIf="(users$ | async) as users; else noData">
-    <thead>
-        <tr>
-            <td>STT</td>
-            <td>Account</td>
-            <td>Role</td>
-            <td>FullName</td>
-            <td>Email</td>
-            <td>Ngay tao</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let user of users, let i=index">
-            <td>{{i+1}}</td>
-            <td>{{user.username}}</td>
-            <td>{{user.role}}</td>
-            <td>{{user.fullname}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.createdAt | date:'dd/MM/yyyy hh:mm'}}</td>
-            <td><button mat-icon-button (click)="selectUser(user)">
-                <mat-icon>update</mat-icon>
-            </button></td>
-            <td><button mat-icon-button (click)="confirmDelete(user.id)">
-                <mat-icon>delete</mat-icon>
-            </button></td>
-        </tr>
-    </tbody>
+    <app-shared-table
+    [displayedColumns]="columns"
+    [dataSource]="users"
+    [cellActions]="config"
+    >
+    </app-shared-table>
 </table>
 <ng-template #noData>
     <p>User NotFound</p>

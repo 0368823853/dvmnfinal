@@ -12,6 +12,8 @@ import { AuthService } from '../../service/auth.service';
   templateUrl: './device-form.component.html',
   styleUrls: ['./device-form.component.css']
 })
+
+//TODO: HoanNTh: button thêm mới và cancel để cùng 1 hàng
 export class DeviceFormComponent implements OnInit{
   deviceForm: FormGroup;
   isEditMode = false;
@@ -33,8 +35,8 @@ export class DeviceFormComponent implements OnInit{
   addDevice(){
     this.deviceService.addDevice(this.deviceForm.value).subscribe({
       next: () => {
-        alert('Add Device Successfull!');
-        this.dialogRef.close('success'); 
+        alert('Thêm thiết bị thành công!');
+        this.dialogRef.close('success');
       },
       error: (err) => {
         this.authService.handleUnauthorizadError(err);
@@ -42,11 +44,12 @@ export class DeviceFormComponent implements OnInit{
       }
     });
   }
+  
   updateDevice(){
 
     this.deviceService.updateDevice(this.data.device.id, this.deviceForm.value).subscribe({
       next: () => {
-        alert('Update Device Successfull!');
+        alert('Cập nhật thiết bị thành công!');
         this.dialogRef.close('success'); // Cập nhật thành công
       },
       error: (err) => {
