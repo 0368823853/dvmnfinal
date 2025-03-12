@@ -12,7 +12,7 @@ import { AuthService } from '../../service/auth.service';
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css'
 })
-export class UserFormComponent implements OnInit{
+export class UserFormComponent implements OnInit {
 
   userForm: FormGroup;
 
@@ -23,37 +23,35 @@ export class UserFormComponent implements OnInit{
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
-    @Inject(MAT_DIALOG_DATA) public data:{user: User}
-  ){
+    @Inject(MAT_DIALOG_DATA) public data: { user: User }
+  ) {
     this.userForm = this.fb.group({
       username: [data.user.username, [Validators.required, Validators.minLength(3)]],
       role: [data.user.role, [Validators.required, Validators.pattern('^(ADMIN|USER)$')]],
       fullname: [data.user.fullname, [Validators.required, Validators.minLength(3)]],
       email: [data.user.email, [Validators.required, Validators.email]]
-    })
+    });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
-
-  updateUser(){
-    if(this.userForm.valid){
+  updateUser() {
+    if (this.userForm.valid) {
       this.userService.updateUser(this.data.user.id, this.userForm.value).subscribe({
-        next: ()=>{
-          alert('Cập nhật người dùng thành công!');
+        next: () => {
+          alert('User updated successfully!');
           this.dialogRef.close('success');
         },
-        error:(err)=>{
+        error: (err) => {
           this.authService.handleUnauthorizadError(err);
-          alert('Lỗi Cập nhật người dùng!');
+          alert('Failed to update user!');
           console.error(err);
         }
-      })
+      });
     }
   }
 
-  closeDialog(){
+  closeDialog() {
     this.dialogRef.close();
   }
 }

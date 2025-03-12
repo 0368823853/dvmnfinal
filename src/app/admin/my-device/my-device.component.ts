@@ -12,14 +12,15 @@ import { CellAction } from '../shared-table/shared-table.component';
   templateUrl: './my-device.component.html',
   styleUrl: './my-device.component.css'
 })
-export class MyDeviceComponent implements OnInit{
+export class MyDeviceComponent implements OnInit {
 
-  devices: DeviceAssignment[]=[];
+  devices: DeviceAssignment[] = [];
   devices$ = new BehaviorSubject<DeviceAssignment[]>([]);
   config: Array<CellAction>;
-  columns =['deviceName','deviceStatus','createdAt','status'];
+  columns = ['deviceName', 'deviceStatus', 'createdAt', 'status'];
 
-  constructor(private deviceAssignmentService: DeviceAssignmentService,
+  constructor(
+    private deviceAssignmentService: DeviceAssignmentService,
     private router: Router,
     private authService: AuthService
   ) {
@@ -27,39 +28,38 @@ export class MyDeviceComponent implements OnInit{
       {
         name: 'Return',
         icon: 'keyboard_return',
-        onAction:(device: DeviceAssignment) => this.unassignDevice(device.id)
+        onAction: (device: DeviceAssignment) => this.unassignDevice(device.id)
       }
-    ]
+    ];
   }
 
   ngOnInit(): void {
     this.loadDevices();
   }
 
-  loadDevices(){
+  loadDevices() {
     this.deviceAssignmentService.getUserDevices().subscribe({
-      next: (data)=>{
+      next: (data) => {
         this.devices = data;
       },
-      error: (err)=>{
+      error: (err) => {
         this.authService.handleUnauthorizadError(err);
       }
     });
   }
 
-  unassignDevice(deviceAssignmentId: string){
-    if(confirm("Bạn có chắc chắn muốn trả thiết bị này không?")){
+  unassignDevice(deviceAssignmentId: string) {
+    if (confirm("Are you sure you want to return this device?")) {
       this.deviceAssignmentService.unAssignment(deviceAssignmentId).subscribe({
-        next: ()=>{
-          alert('Trả thiết bị thành công!');
+        next: () => {
+          alert('Device returned successfully!');
           this.loadDevices();
         },
-        error: (err)=>{
+        error: (err) => {
           this.authService.handleUnauthorizadError(err);
-          alert('Thiết bị đã được trả, đang chờ xác nhận');
+          alert('Device has already been returned and is pending confirmation.');
         }
-      })
+      });
     }
   }
-
 }

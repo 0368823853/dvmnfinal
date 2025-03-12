@@ -2,11 +2,11 @@
 
 <mat-label style="margin-right: 10px;">Search User:</mat-label>
 <input matInput type="text" [(ngModel)]="searchText" placeholder="Input the user...">
-<button mat-raised-button color="primary" (click)="searchName()">Search</button>
-<button mat-raised-button color="primary" (click)="navigate('/user/register')" style="margin-right: 30px;">Create User</button>
+<button mat-raised-button color="primary" (click)="searchByName()">Search</button>
+<button mat-raised-button color="primary" (click)="addUser()" style="margin-right: 30px;">Create User</button>
 
 <label for="status">Select Role:</label>
-<select id="status" [(ngModel)]="selectedRole" (change)="filterUserByRole()">
+<select id="status" [(ngModel)]="selectedRole" (change)="filterUsersByRole()">
   <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
 </select>
 

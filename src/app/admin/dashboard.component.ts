@@ -11,9 +11,10 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class AdminComponent{
+export class AdminComponent implements OnInit{
   @ViewChild('sidenav') sidenav!: MatSidenav;
   userRole: string | null = null;
+  username: string ='';
 
   menuItems = [
     { title: 'Dashboard', icon: 'home', route: 'dashboard', roles: ['ROLE_ADMIN', 'ROLE_USER'] },
@@ -26,6 +27,12 @@ export class AdminComponent{
   constructor(private router: Router, private authService: AuthService, private dialog: MatDialog) {
     this.userRole = this.authService.getUserRole();
   }
+
+  ngOnInit(): void {
+    const user = this.authService.getCurrentUser();
+    this.username = user ? user.username : 'Not Found' ;
+  }
+  
 
   navigate(route: string) {
     this.router.navigate([route]);

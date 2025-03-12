@@ -43,3 +43,19 @@ button {
 button:hover {
   background: #1565c0;
 }
+.username {
+  font-weight: bold;
+  margin-right: 16px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+}
+mat-icon {
+  margin-right: 8px; 
+}
+
+
+
+

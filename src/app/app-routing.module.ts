@@ -6,7 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
   //TODO: HoanNTh: tại sao path dashboard lại import AdminModule trong khi user cũng có dashboard
-  { path: 'dashboard', loadChildren: () => import('./admin/dashboard.module').then(m => m.DashboardModule), canActivate:[AuthGuard], data:{role: 'ROLE_ADMIN'} },
+  { path: 'dashboard', loadChildren: () => import('./admin/dashboard.module').then(m => m.DashboardModule) },
   // { path: 'devices', component: DeviceListComponent}
 ];
 

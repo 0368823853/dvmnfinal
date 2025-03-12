@@ -78,9 +78,9 @@ select {
   width: 150px; 
   padding: 8px 12px;
   font-size: 14px;
-  border: 1px solid #868585;
+  border: 1px solid #cccaca;
   border-radius: 5px;
-  background-color: rgb(218, 215, 215);
+  background-color: rgb(255, 255, 255);
 }
 
 label {

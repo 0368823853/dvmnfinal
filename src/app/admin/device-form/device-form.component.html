@@ -1,58 +1,52 @@
 <mat-dialog-content>
-<mat-card class="device-form-card">
-  <mat-card-title style="padding-bottom: 20px;">Device Management</mat-card-title>
+  <mat-card class="device-form-card">
+    <mat-card-title style="padding-bottom: 20px;">Device Management</mat-card-title>
 
-  <form [formGroup]="deviceForm" (ngSubmit)="submitForm()">
+    <form [formGroup]="deviceForm" (ngSubmit)="submitForm()">
 
-    <mat-form-field appearance="outline">
-      <mat-label>Name Device</mat-label>
-      <input matInput formControlName="name" />
-      <mat-error *ngIf="deviceForm.controls['name'].hasError('required')">
-        Tên thiết bị không được để trống
-      </mat-error>
-      <mat-error *ngIf="deviceForm.controls['name'].hasError('minlength')">
-        Tên thiết bị phải có ít nhất 3 ký tự
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Device Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="deviceForm.controls['name'].hasError('required')">
+          Device name is required
+        </mat-error>
+        <mat-error *ngIf="deviceForm.controls['name'].hasError('minlength')">
+          Device name must be at least 3 characters long
+        </mat-error>
+      </mat-form-field>
 
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" />
+        <mat-error *ngIf="deviceForm.controls['description'].hasError('required')">
+          Description is required
+        </mat-error>
+        <mat-error *ngIf="deviceForm.controls['description'].hasError('minlength')">
+          Description must be at least 5 characters long
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Description</mat-label>
-      <input matInput formControlName="description" />
-      <mat-error *ngIf="deviceForm.controls['description'].hasError('required')">
-        Mô tả không được để trống
-      </mat-error>
-      <mat-error *ngIf="deviceForm.controls['description'].hasError('minlength')">
-        Mô tả phải có ít nhất 5 ký tự
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="active">Active</mat-option>
+          <mat-option value="inactive">Inactive</mat-option>
+        </mat-select>
+        <mat-error *ngIf="deviceForm.controls['status'].hasError('required')">
+          Status is required
+        </mat-error>
+        <mat-error *ngIf="deviceForm.controls['status'].hasError('pattern')">
+          Status must be either "active" or "inactive"
+        </mat-error>
+      </mat-form-field>
 
+      <mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" type="submit" [disabled]="deviceForm.invalid">
+          {{ isEditMode ? 'Update' : 'Add' }}
+        </button>
+        <button mat-button color="warn" (click)="closeDialog()">Cancel</button>
+      </mat-dialog-actions>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Status</mat-label>
-      <mat-select formControlName="status">
-        <mat-option value="active">active</mat-option>
-        <mat-option value="inactive">inactive</mat-option>
-      </mat-select>
-      <mat-error *ngIf="deviceForm.controls['status'].hasError('required')">
-        Trạng thái không được để trống
-      </mat-error>
-      <mat-error *ngIf="deviceForm.controls['status'].hasError('pattern')">
-        Trạng thái chỉ được là "active" hoặc "inactive"
-      </mat-error>
-    </mat-form-field>
-
-
-
-    <mat-dialog-actions align="end">
-      <button mat-raised-button color="primary" type="submit" [disabled]="deviceForm.invalid">
-        {{ isEditMode ? 'Update' : 'Add' }}
-      </button>
-      <button mat-button color="warn" (click)="closeDialog()">Cancel</button>
-    </mat-dialog-actions>
-
-  </form>
-</mat-card>
+    </form>
+  </mat-card>
 </mat-dialog-content>
-
-

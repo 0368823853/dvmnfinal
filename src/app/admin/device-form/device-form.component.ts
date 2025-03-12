@@ -35,26 +35,25 @@ export class DeviceFormComponent implements OnInit{
   addDevice(){
     this.deviceService.addDevice(this.deviceForm.value).subscribe({
       next: () => {
-        alert('Thêm thiết bị thành công!');
+        alert('Device added successfully!');
         this.dialogRef.close('success');
       },
       error: (err) => {
         this.authService.handleUnauthorizadError(err);
-        alert('Lỗi khi thêm thiết bị');
+        alert('Error adding device');
       }
     });
   }
   
   updateDevice(){
-
     this.deviceService.updateDevice(this.data.device.id, this.deviceForm.value).subscribe({
       next: () => {
-        alert('Cập nhật thiết bị thành công!');
-        this.dialogRef.close('success'); // Cập nhật thành công
+        alert('Device updated successfully!');
+        this.dialogRef.close('success');
       },
       error: (err) => {
         this.authService.handleUnauthorizadError(err);
-        alert('Lỗi khi cập nhật thiết bị:');
+        alert('Error updating device');
       }
     });
   }
@@ -67,8 +66,8 @@ export class DeviceFormComponent implements OnInit{
         this.addDevice();
       }
     }
-
   }
+
   closeDialog(){
     this.dialogRef.close();
   }

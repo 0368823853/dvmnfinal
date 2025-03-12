@@ -10,7 +10,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrl: './password-change.component.css'
 })
 
-//TODO: HoanNTh: rà soát text trong alert của toàn bộ project, chỗ viết hoa, chỗ viết thường chỗ thì không dấu
+// TODO: HoanNTh: Review alert messages throughout the project to ensure consistency in capitalization and punctuation.
 export class PasswordChangeComponent {
 
   passwordForm: FormGroup;
@@ -26,32 +26,32 @@ export class PasswordChangeComponent {
     });
   }
 
-  updatePassword(){
-    if(this.passwordForm.invalid){
-      alert('Vui lòng điền đầy đủ thông tin');
+  updatePassword() {
+    if (this.passwordForm.invalid) {
+      alert('Please fill in all required fields.');
       return;
     }
 
-    const{oldPassword, newPassword, confirmPassword} = this.passwordForm.value;
+    const { oldPassword, newPassword, confirmPassword } = this.passwordForm.value;
 
-    if(newPassword !== confirmPassword){
-      alert('Mật khẩu mới không khớp');
+    if (newPassword !== confirmPassword) {
+      alert('New password does not match.');
       return;
     }
 
-    this.userService.updatePassword({oldPassword, newPassword}).subscribe({
-      next:()=>{
-        alert('Cập nhật mật khẩu thành công');
-        this.passwordForm.reset;
+    this.userService.updatePassword({ oldPassword, newPassword }).subscribe({
+      next: () => {
+        alert('Password updated successfully.');
+        this.passwordForm.reset();
         this.dialogRef.close();
       },
       error: () => {
-        alert('Vui lòng kiểm tra lại mật khẩu');
+        alert('Please check your current password.');
       }
     });
   }
 
-  dialogRefClose(){
+  dialogRefClose() {
     this.dialogRef.close();
   }
 }

@@ -1,34 +1,49 @@
 <div class="register-card">
-    <label>Register</label>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <mat-form-field>
-        <mat-label>Username</mat-label>
-        <input matInput formControlName="username">
-        <mat-error *ngIf="registerForm.controls['username'].hasError('required')">Vui lòng nhập tên đăng nhập</mat-error>
-      </mat-form-field>
+  <label>Register</label>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username">
+      <mat-error *ngIf="registerForm.controls['username'].hasError('required')">
+        Please enter a username
+      </mat-error>
+    </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password">
-        <!--TODO: HoanNTh: Chỗ có dấu, chỗ k dấu không đồng nhất-->
-        <mat-error *ngIf="registerForm.controls['password'].hasError('required')">Vui lòng nhập pasword</mat-error>
-        <mat-error *ngIf="registerForm.controls['password'].hasError('minlength')">Mật khẩu ít nhất 6 ký tự</mat-error>
-      </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password">
+      <mat-error *ngIf="registerForm.controls['password'].hasError('required')">
+        Please enter a password
+      </mat-error>
+      <mat-error *ngIf="registerForm.controls['password'].hasError('minlength')">
+        Password must be at least 6 characters
+      </mat-error>
+    </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Fullname</mat-label>
-        <input matInput formControlName="fullname">
-        <mat-error *ngIf="registerForm.controls['fullname'].hasError('required')">Vui lòng nhập họ tên</mat-error>
-      </mat-form-field>
+    <mat-form-field>
+      <mat-label>Full Name</mat-label>
+      <input matInput formControlName="fullname">
+      <mat-error *ngIf="registerForm.controls['fullname'].hasError('required')">
+        Please enter your full name
+      </mat-error>
+    </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email">
-        <!--TODO: HoanNTh: Chỗ có dấu, chỗ k dấu không đồng nhất-->
-        <mat-error *ngIf="registerForm.controls['email'].hasError('required')">Email không được để trống</mat-error>
-        <mat-error *ngIf="registerForm.controls['email'].hasError('email')">Email không hợp lệ</mat-error>
-      </mat-form-field>
-
-      <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Register</button>
-    </form>
-  </div>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+      <mat-error *ngIf="registerForm.controls['email'].hasError('required')">
+        Email cannot be empty
+      </mat-error>
+      <mat-error *ngIf="registerForm.controls['email'].hasError('email')">
+        Invalid email format
+      </mat-error>
+    </mat-form-field>
+    <div class="button-group">
+      <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
+        Register
+      </button>
+      <button mat-button color="warn" (click)="closeDialog()">Cancel</button>
+    </div>
+    
+  </form>
+</div>

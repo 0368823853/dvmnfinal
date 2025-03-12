@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
-import { Observable } from 'rxjs';
+import { Observable, take, tap } from 'rxjs';
 import { AppConstants } from '../models/app-constants';
 
 @Injectable({
@@ -38,12 +38,29 @@ export class AuthService {
     }
   }
 
+  getCurrentUser(): any {
+    const token = localStorage.getItem('currentUser');
+    if (!token) return null;
+  
+    try {
+      const decoded: any = jwtDecode(token); // Giải mã token
+      return { username: decoded.sub, role: decoded.role };
+    } catch (error) {
+      return null;
+    }
+  }
+  
+
   isAdmin(): boolean{
     return this.getUserRole()==='ADMIN';
   }
 
   login(username: string, password: string): Observable<string>{
-    return this.http.post(`${AppConstants.apiUrl}/user/login`,{ username, password}, { responseType: 'text' });
+    return this.http.post(`${AppConstants.apiUrl}/user/login`,{ username, password}, { responseType: 'text' }).pipe(
+      tap(user =>{
+        localStorage.setItem('currentUser', JSON.stringify(user));
+      })
+    );
   }
 
   logout(){
@@ -57,7 +74,7 @@ export class AuthService {
 
   handleUnauthorizadError(error: any){
     if(error.status === 401){
-      alert('Phiên đăng nhập hết hạn, vui lòng đăng nhập lại');
+      alert('Login session expired, please log in again');
       this.router.navigate(['/auth']);
     }
   }

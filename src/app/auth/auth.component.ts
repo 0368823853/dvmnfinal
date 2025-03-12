@@ -3,6 +3,8 @@ import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { AppConstants } from '../models/app-constants';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-auth',
@@ -17,7 +19,7 @@ export class AuthComponent {
 
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
+  constructor(private dialog: MatDialog, private fb: FormBuilder, private router: Router, private authService: AuthService) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -32,11 +34,23 @@ export class AuthComponent {
         this.router.navigate(['/dashboard'])
       },
       error: (err) => {
-        alert('Sai tai khoan hoac mat khau');
+        alert('Wrong account or password');
       },
     });
   }
   navigateToRegister() {
-    this.router.navigate(['/user/register']);
+    this.showUnauthorizedDialog();
+    return false;
+  }
+
+  private showUnauthorizedDialog(): void {
+    const dialogRef = this.dialog.open(RegisterComponent, {
+      width: '400px',
+      disableClose: true, // Bắt buộc user phải thao tác trên dialog
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigate(['/auth']);
+    });
   }
 }

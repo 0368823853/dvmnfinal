@@ -5,13 +5,13 @@
       <mat-form-field>
       <mat-label for="username">Username:</mat-label>
       <input matInput type="text" id="username" [(ngModel)]="username" name="username" required>
-      <mat-error *ngIf="loginForm.controls['username'].hasError('required')">Vui lòng nhập username</mat-error>
+      <mat-error *ngIf="loginForm.controls['username'].hasError('required')">Please input username</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label for="password">Password:</mat-label>
       <input matInput type="password" id="password" [(ngModel)]="password" name="password" required>
-      <mat-error *ngIf="loginForm.controls['password'].hasError('required')">Vui lòng nhập username</mat-error>
+      <mat-error *ngIf="loginForm.controls['password'].hasError('required')">Please input username</mat-error>
     </mat-form-field>
 
       <button mat-raised-button type="submit">Login</button>

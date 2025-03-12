@@ -20,6 +20,12 @@ export class SharedTableComponent implements OnInit{
   @Input() displayedColumns: string[] = []; // colums
   @Input() dataSource: any[] = []; // data
   @Input() cellActions?: Array<CellAction>; // action(add, edit, delete)
+  columnHeaders: { [key: string]: string } = {
+    username: 'UserName',role: 'Role', fullname: 'FullName', email: 'Email' ,createdAt: 'Creation Date',
+    deviceName: 'DeviceName', deviceStatus: 'DeviceStatus', confirmAt: 'Confirm Date', status: 'Status',
+    name: 'DeviceName', description: 'Description'
+  };
+  
 
   ngOnInit(): void {
   }
