@@ -27,7 +27,7 @@ export class AssignUserDialogComponent implements OnInit{
   }
   confirmSelection() {
     if (!this.selectedUserId) {
-      alert('Vui lòng chọn User!');
+      alert('Please choose user');
       return;
     }
     this.dialogRef.close(this.selectedUserId);

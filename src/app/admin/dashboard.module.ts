@@ -21,12 +21,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UserFormComponent } from './user-form/user-form.component';
-import { MatIconButton } from '@angular/material/button';
+import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { MyDeviceComponent } from './my-device/my-device.component';
 import { AdminAssignmentComponent } from './admin-assignment/admin-assignment.component';
 import { SharedTableComponent } from './shared-table/shared-table.component';
 import { AssignUserDialogComponent } from './assign-user-dialog/assign-user-dialog.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -40,7 +43,9 @@ import { AssignUserDialogComponent } from './assign-user-dialog/assign-user-dial
     MyDeviceComponent,
     AdminAssignmentComponent,
     SharedTableComponent,
-    AssignUserDialogComponent
+    AssignUserDialogComponent,
+    DashboardComponent,
+    AdminDashboardComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +65,9 @@ import { AssignUserDialogComponent } from './assign-user-dialog/assign-user-dial
     MatCardModule,
     MatInputModule,
     MatDialogModule,
-    MatIconButton
+    MatIconButton,
+    MatMenuModule,
+    MatButtonModule
   ]
 })
 export class DashboardModule { }

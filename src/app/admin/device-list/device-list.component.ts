@@ -29,7 +29,7 @@ export class DeviceListComponent implements OnInit {
   device = { id: '', name: '', description: '', status: '', createdAt: '' };
 
   selectedStatus: string = ''; // Trạng thái được chọn
-  statuses: string[] = ['active', 'inactive']; // Các trạng thái có thể lọc
+  statuses: any[] = ['all', 'active', 'inactive'];
   selectedUserId: string = '';
   users: User[] = [];
   config: Array<CellAction>;
@@ -138,11 +138,15 @@ export class DeviceListComponent implements OnInit {
     }
   }
 
+  
+ // 'all' để hiển thị tất cả
+
   filterDevicesByStatus() {
-    if (!this.selectedStatus) {
-      this.filteredDevices$.next(this.devices);
+    if (this.selectedStatus === 'all') {
+      this.filteredDevices$.next(this.devices); // Hiển thị tất cả thiết bị
       return;
     }
+  
     this.deviceService.filterStatus(this.selectedStatus).subscribe({
       next: (filteredDevices) => {
         this.filteredDevices$.next(filteredDevices);
@@ -152,6 +156,7 @@ export class DeviceListComponent implements OnInit {
       }
     });
   }
+  
 
   loadUser() {
     this.userService.getUser().subscribe({

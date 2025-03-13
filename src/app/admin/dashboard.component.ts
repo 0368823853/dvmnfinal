@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit{
   username: string ='';
 
   menuItems = [
-    { title: 'Dashboard', icon: 'home', route: 'dashboard', roles: ['ROLE_ADMIN', 'ROLE_USER'] },
+    { title: 'Dashboard', icon: 'home', route: 'dashboard/dashboard', roles: ['ROLE_ADMIN', 'ROLE_USER'] },
     { title: 'Device Management', icon: 'devices', route: 'dashboard/devices', roles: ['ROLE_ADMIN'] },
     { title: 'User Management', icon: 'person', route: 'dashboard/user-management', roles: ['ROLE_ADMIN'] },
     { title: 'Device Assignment', icon: 'assignment', route: 'dashboard/admin-assignment', roles: ['ROLE_ADMIN'] },

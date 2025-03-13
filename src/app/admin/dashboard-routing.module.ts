@@ -9,10 +9,12 @@ import { MyDeviceComponent } from './my-device/my-device.component';
 import { AdminAssignmentComponent } from './admin-assignment/admin-assignment.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { AppConstants } from '../models/app-constants';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent,
     children:[
+      {path: 'dashboard', component: AdminDashboardComponent, canActivate:[AuthGuard]},
       {path: 'devices', component: DeviceListComponent, canActivate:[AuthGuard], data:{role: AppConstants.ROLE_ADMIN}},
       {path: 'device-form', component: DeviceFormComponent, canActivate:[AuthGuard], data:{role: AppConstants.ROLE_ADMIN}},
       {path: 'device-form/update/:id', component: DeviceFormComponent, canActivate:[AuthGuard], data:{role: AppConstants.ROLE_ADMIN}},

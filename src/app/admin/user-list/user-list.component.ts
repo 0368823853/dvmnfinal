@@ -24,7 +24,7 @@ export class UserListComponent implements OnInit {
   users$ = new BehaviorSubject<User[]>([]);
   selectedRole: string = '';
   // TODO: HoanNTh: Use constants
-  roles: string[] = [AppConstants.ROLES.ADMIN, AppConstants.ROLES.USER];
+  roles: string[] = ['',AppConstants.ROLES.ADMIN, AppConstants.ROLES.USER];
 
   columns = ['username', 'role', 'fullname', 'email', 'createdAt'];
   config: Array<CellAction>;

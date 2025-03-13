@@ -32,20 +32,24 @@
 }
 button {
   padding: 8px 12px;
-  background: #1976d2;
-  color: white;
+  background: #b4b6b8;
+  color: rgb(0, 0, 0);
   border: none;
   border-radius: 4px;
   cursor: pointer;
   margin-left: 8px;
+  margin-right: 20px;
 }
 
 button:hover {
-  background: #1565c0;
+  background: #bfc1c4;
 }
 .username {
-  font-weight: bold;
   margin-right: 16px;
+  font-size: 15px;
+}
+.title{
+  font-weight: bold;
 }
 
 .menu-item {
@@ -54,6 +58,26 @@ button:hover {
 }
 mat-icon {
   margin-right: 8px; 
+  vertical-align: middle;
+  font-size: 24px;
+  cursor: pointer;
+}
+mat-nav-list{
+  background: rgb(197, 195, 195);
+  height: 100%;
+}
+/* Menu */
+mat-menu {
+  border-radius: 8px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Nút trong menu */
+mat-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
 }
 
 

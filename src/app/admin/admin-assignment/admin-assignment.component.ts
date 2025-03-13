@@ -18,7 +18,7 @@ export class AdminAssignmentComponent implements OnInit{
   devices: DeviceAssignment[]=[];
   devices$ = new BehaviorSubject<DeviceAssignment[]>([]);
   searchText: string = '';
-  columns = ['deviceName','deviceStatus','createdAt','confirmAt','status'];
+  columns = ['deviceName','deviceStatus', 'userName','createdAt','confirmAt','status'];
   config: Array<CellAction>;
 
   constructor(private deviceAssignmentService: DeviceAssignmentService,
@@ -52,15 +52,15 @@ export class AdminAssignmentComponent implements OnInit{
 
 
   confirmAssignDevice(deviceAssignmentId: string) {
-    if (confirm('Bạn có chắc chắn muốn xác nhận thiết bị này không?')) {
+    if (confirm('Are you sure you want to authenticate this device?')) {
       this.deviceAssignmentService.confirmAssignment(deviceAssignmentId).subscribe({
         next: () => {
-          alert('Xác nhận thiết bị thành công');
+          alert('Device confirmation successful');
           this.loadDeviceAssignment();
         },
         error: (err) => {
           this.authService.handleUnauthorizadError(err);
-          alert('Lỗi: ' + err.error);
+          alert('Error: ' + err.error);
         },
       });
     }

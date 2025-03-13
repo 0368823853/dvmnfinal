@@ -15,6 +15,8 @@ import { AuthModule } from './auth/auth.module';
 import { FormsModule } from '@angular/forms';
 import { UnauthorizedDialogComponent } from './guards/unauthorized-dialog/unauthorized-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     AuthModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

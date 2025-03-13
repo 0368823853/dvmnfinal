@@ -1,11 +1,17 @@
 .login-container {
-    width: 300px;
+    width: 500px;
     margin: 100px auto;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    background: #e9e8e8;
+  }
+
+  mat-form-field{
+    width: 100%;
+    margin-bottom: 15px;
   }
   
   input {
@@ -25,9 +31,12 @@
     border-radius: 5px;
     cursor: pointer;
   }
+  p{
+    margin-top: 10px;
+  }
   
   button:hover {
-    background-color: #0056b3;
+    background-color: #d8dbdf;
   }
   
   .error {

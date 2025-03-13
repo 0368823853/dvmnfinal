@@ -22,8 +22,8 @@ export class SharedTableComponent implements OnInit{
   @Input() cellActions?: Array<CellAction>; // action(add, edit, delete)
   columnHeaders: { [key: string]: string } = {
     username: 'UserName',role: 'Role', fullname: 'FullName', email: 'Email' ,createdAt: 'Creation Date',
-    deviceName: 'DeviceName', deviceStatus: 'DeviceStatus', confirmAt: 'Confirm Date', status: 'Status',
-    name: 'DeviceName', description: 'Description'
+    deviceName: 'Device Name', deviceStatus: 'DeviceStatus', confirmAt: 'Confirm Date', status: 'Status',
+    name: 'Device Name', description: 'Description', userName:'User Name'
   };
   
 

@@ -7,10 +7,22 @@
       <span class="spacer"></span>
     
       <!-- Hiển thị tên tài khoản -->
-      <span class="username">{{ username }}: ({{userRole}}) </span>
+      <span class="username">{{ username }} ({{ userRole }})</span>
     
-      <button mat-button (click)="openChangePasswordDialog()">Change password</button>
-      <button mat-button (click)="navigate('/auth')" color="warn">Logout</button>
+      <!-- Icon mở menu -->
+      <button style="background: rgb(21, 122, 238); width: 50px; height: 50px;" mat-icon-button [matMenuTriggerFor]="userMenu">
+        <mat-icon style="display: flex; align-items: center;">account_circle</mat-icon>
+      </button>
+    
+      <!-- Menu chứa các nút -->
+      <mat-menu #userMenu="matMenu">
+        <button style="width: 200px; margin-left: 20px;" mat-menu-item (click)="openChangePasswordDialog()">
+          <mat-icon>vpn_key</mat-icon> Change Password
+        </button>
+        <button style="width: 200px; margin-left: 20px;" mat-menu-item (click)="navigate('/auth')" color="warn">
+          <mat-icon>exit_to_app</mat-icon> Logout
+        </button>
+      </mat-menu>
     </mat-toolbar>
     
     <mat-nav-list>
@@ -24,7 +36,9 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="content">
-    <router-outlet></router-outlet>
+    
+    <router-outlet>
+    </router-outlet>
   </mat-sidenav-content>
 
 </mat-sidenav-container>
