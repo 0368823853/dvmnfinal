@@ -25,7 +25,7 @@ export class DeviceFormComponent implements OnInit{
     this.deviceForm = this.fb.group({
       name: [data?.device?.name || '', [Validators.required, Validators.minLength(3)]],
       description: [data?.device?.description || '', [Validators.required, Validators.minLength(5)]],
-      status: [data?.device?.status ||'', [Validators.required, Validators.pattern('^(active|inactive)$')]]
+      status: [data?.device?.status ||'', [Validators.required, Validators.pattern('^(Active|Inactive)$')]]
     });
   }
 
@@ -70,5 +70,6 @@ export class DeviceFormComponent implements OnInit{
 
   closeDialog(){
     this.dialogRef.close();
+    return;
   }
 }

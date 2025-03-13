@@ -2,7 +2,7 @@
   
   <mat-sidenav mode="side" class="sidenav" opened>
 
-    <mat-toolbar color="primary" class="top-toolbar">
+    <mat-toolbar style="background: rgb(197, 195, 195);" color="primary" class="top-toolbar">
       <span class="title">Device Management System</span>
       <span class="spacer"></span>
     
@@ -10,16 +10,16 @@
       <span class="username">{{ username }} ({{ userRole }})</span>
     
       <!-- Icon mở menu -->
-      <button style="background: rgb(21, 122, 238); width: 50px; height: 50px;" mat-icon-button [matMenuTriggerFor]="userMenu">
-        <mat-icon style="display: flex; align-items: center;">account_circle</mat-icon>
+      <button style="background: rgb(197, 195, 195); width: 50px; height: 50px;" mat-icon-button [matMenuTriggerFor]="userMenu">
+        <mat-icon class="icon" style="display: flex; align-items: center;">account_circle</mat-icon>
       </button>
     
       <!-- Menu chứa các nút -->
       <mat-menu #userMenu="matMenu">
-        <button style="width: 200px; margin-left: 20px;" mat-menu-item (click)="openChangePasswordDialog()">
+        <button  mat-menu-item (click)="openChangePasswordDialog()">
           <mat-icon>vpn_key</mat-icon> Change Password
         </button>
-        <button style="width: 200px; margin-left: 20px;" mat-menu-item (click)="navigate('/auth')" color="warn">
+        <button  mat-menu-item (click)="navigate('/auth')" color="warn">
           <mat-icon>exit_to_app</mat-icon> Logout
         </button>
       </mat-menu>

@@ -30,7 +30,7 @@ export class AdminAssignmentComponent implements OnInit{
         name: 'Confirm',
         icon: 'check_circle',
         onAction: (device: DeviceAssignment)=> this.confirmAssignDevice(device.id),
-        visible: (device: DeviceAssignment) => device.status === 'Returned'
+        disabled: (device: DeviceAssignment) => device.status === 'Borrowed'
       }
     ]
   }

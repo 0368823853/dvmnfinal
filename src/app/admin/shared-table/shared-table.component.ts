@@ -5,8 +5,8 @@ export interface CellAction {
   name: string;
   icon: string;
   onAction: (rowData: any) => void;
-  visible?: (row: any) => boolean;
-}
+  disabled?: (row: any) => boolean; // ✅ Thêm thuộc tính này!
+  }
 
 @Component({
   selector: 'app-shared-table',
@@ -25,6 +25,7 @@ export class SharedTableComponent implements OnInit{
     deviceName: 'Device Name', deviceStatus: 'DeviceStatus', confirmAt: 'Confirm Date', status: 'Status',
     name: 'Device Name', description: 'Description', userName:'User Name'
   };
+  extendedColumns: string[] = [];
   
 
   ngOnInit(): void {

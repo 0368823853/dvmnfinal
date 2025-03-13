@@ -1,6 +1,6 @@
 <mat-dialog-content>
   <mat-card class="device-form-card">
-    <mat-card-title style="padding-bottom: 20px;">Device Management</mat-card-title>
+    <mat-card-title style="padding-bottom: 20px;">Device</mat-card-title>
 
     <form [formGroup]="deviceForm" (ngSubmit)="submitForm()">
 
@@ -29,8 +29,8 @@
       <mat-form-field appearance="outline">
         <mat-label>Status</mat-label>
         <mat-select formControlName="status">
-          <mat-option value="active">Active</mat-option>
-          <mat-option value="inactive">Inactive</mat-option>
+          <mat-option value="Active">Active</mat-option>
+          <mat-option value="Inactive">Inactive</mat-option>
         </mat-select>
         <mat-error *ngIf="deviceForm.controls['status'].hasError('required')">
           Status is required
@@ -39,13 +39,13 @@
           Status must be either "active" or "inactive"
         </mat-error>
       </mat-form-field>
-
       <mat-dialog-actions align="end">
         <button mat-raised-button color="primary" type="submit" [disabled]="deviceForm.invalid">
           {{ isEditMode ? 'Update' : 'Add' }}
         </button>
-        <button mat-button color="warn" (click)="closeDialog()">Cancel</button>
+        <button mat-button color="warn" type="button" (click)="closeDialog()">Cancel</button>
       </mat-dialog-actions>
+      
 
     </form>
   </mat-card>

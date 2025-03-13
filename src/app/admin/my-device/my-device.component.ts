@@ -28,7 +28,8 @@ export class MyDeviceComponent implements OnInit {
       {
         name: 'Return',
         icon: 'keyboard_return',
-        onAction: (device: DeviceAssignment) => this.unassignDevice(device.id)
+        onAction: (device: DeviceAssignment) => this.unassignDevice(device.id),
+        disabled: (device: DeviceAssignment) => device.status === 'Returned'
       }
     ];
   }

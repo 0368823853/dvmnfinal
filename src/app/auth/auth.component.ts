@@ -31,7 +31,7 @@ export class AuthComponent {
       next:(token)=>{
         //TODO: HoanNTh: Bỏ log thừa
         this.authService.saveToken(token);
-        this.router.navigate(['/dashboard'])
+        this.router.navigate(['/dashboard/dashboard'])
       },
       error: (err) => {
         alert('Wrong account or password');

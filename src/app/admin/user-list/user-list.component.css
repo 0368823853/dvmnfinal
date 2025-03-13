@@ -1,84 +1,105 @@
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
 
-  thead {
-    background: #1976d2; 
-    color: white;
-    text-transform: uppercase;
-  }
-  
-  th {
-    padding: 12px;
-    text-align: left;
-  }
-  
 
-  td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-  }
-  
+thead {
+  background: #c6c7c9; 
+  color: white;
+  text-transform: uppercase;
+}
 
-  tr:hover {
-    background: #f5f5f5;
-    transition: 0.3s;
-  }
-  
+th {
+  padding: 12px;
+  text-align: left;
+}
 
-  input[type="text"] {
-    width: 250px;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-  }
-  
-  input[type="text"]:focus {
-    border-color: #1976d2;
-  }
-  
+.search-container {
+  display: flex;
+  justify-content: space-between; /* Đẩy "Add Device" về cuối dòng */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  width: 100%;
+  gap: 10px;
+}
 
-  button {
-    padding: 8px 12px;
-    background: #acaeb1;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 8px;
-  }
-  
-  button:hover {
-    background: #c0c2c4;
-  }
+.search-group {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Khoảng cách giữa các input */
+}
 
-  .ng-template {
-    text-align: center;
-    font-size: 16px;
-    color: #888;
-    padding: 20px;
-  }
-  select {
-    width: 150px; 
-    padding: 8px 12px;
-    font-size: 14px;
-    border: 1px solid #c9c7c7;
-    border-radius: 5px;
-    background-color: rgb(255, 255, 255);
-  }
+
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+
+tr:hover {
+  background: #f5f5f5;
+  transition: 0.3s;
+}
+
+
+input[type="text"] {
+  width: 250px;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: #1976d2;
+}
+
+
+button {
+  padding: 8px 12px;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
   
-  label {
-    font-weight: bold;
-    margin-right: 5px;
-    margin-left: 20px;
-  }
-  
+}
+
+button:hover {
+  background: #7e7b7b;
+}
+
+
+
+.ng-template {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
+  padding: 20px;
+}
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin: 10px;
+}
+
+select {
+  width: 150px; 
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #cccaca;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+}
+
+label {
+  font-weight: bold;
+  margin-right: 5px;
+}

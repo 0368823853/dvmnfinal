@@ -1,13 +1,18 @@
 
-    <mat-label style="margin-right: 10px;">Search Device:</mat-label>
-    <input matInput type="text" [(ngModel)]="searchText" placeholder="Input the device name...">
-  <button mat-raised-button color="primary" (click)="searchName()">Search</button>
-  <button mat-raised-button color="primary" (click)="goToAddDevice()" style="margin: 30px;">Add Device</button>
+<div class="search-container">
+  <div class="search-group">
+<mat-label style="margin-right: 10px;">Search Device:</mat-label>
+<input matInput type="text" [(ngModel)]="searchText" placeholder="Input the user...">
+<button style="background: rgb(252, 250, 250); width: 50px; margin-right: 20px;" (click)="searchName()"><mat-icon>search</mat-icon></button>
 
-  <label for="status">Select status:</label>
-  <select id="status" [(ngModel)]="selectedStatus" (change)="filterDevicesByStatus()">
-    <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
-  </select>
+<label for="status">Select Role:</label>
+<select id="status" [(ngModel)]="selectedStatus" (change)="filterDevicesByStatus()">
+  <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+</select>
+  </div>
+<button style="border: 1px solid #cccaca; margin-right: 30px;" color="primary" (click)="goToAddDevice()" mat-icon-button><mat-icon>add</mat-icon></button>
+</div>
+
 
   <table *ngIf="(filteredDevices$ | async) as devices; else noData">
   <app-shared-table

@@ -10,7 +10,7 @@
       <td mat-cell *matCellDef="let element" style="text-align: center;">
         <button mat-icon-button color="primary" 
                 *ngFor="let action of cellActions"
-                
+                [disabled]="action.disabled ? action.disabled(element) : false"
                 (click)="action.onAction(element)">
           <mat-icon>{{ action.icon }}</mat-icon>
         </button>
