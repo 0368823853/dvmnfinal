@@ -11,13 +11,17 @@
         <button mat-icon-button color="primary" 
                 *ngFor="let action of cellActions"
                 [disabled]="action.disabled ? action.disabled(element) : false"
-                (click)="action.onAction(element)">
+                (click)="onActionClick($event, action, element)">
           <mat-icon>{{ action.icon }}</mat-icon>
         </button>
       </td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns.concat('action')"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns.concat('action');"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns.concat('action');"
+    (click)="onRowClick(row)" style="cursor: pointer;"
+    ></tr>
   </table>
-  
+  <!--  -->
+
+    

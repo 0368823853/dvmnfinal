@@ -38,12 +38,12 @@
         Invalid email format
       </mat-error>
     </mat-form-field>
-    <div class="button-group">
+    <mat-dialog-actions align="end">
       <button mat-button color="warn" (click)="closeDialog()">Cancel</button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
+      <button mat-raised-button color="primary" type="submit">
         Register
       </button>
-    </div>
+    </mat-dialog-actions>
     
   </form>
 </div>

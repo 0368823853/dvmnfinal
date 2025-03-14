@@ -67,4 +67,25 @@ table {
     color: #888;
     padding: 20px;
   }
+  .search-container {
+    display: flex;
+    justify-content: space-between; /* Đẩy "Add Device" về cuối dòng */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    width: 100%;
+    gap: 10px;
+  }
   
+  .search-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa các input */
+  }
+  button {
+    padding: 8px 12px;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+    
+  }

@@ -24,10 +24,11 @@
     }
   
     button {
-      margin-top: 10px;
-      padding: 12px;
+      width: 40%;
+      padding: 10px;
       font-size: 16px;
-      border-radius: 8px;
+      margin-left: 10px;
+      margin-right: 10px;
     }
   }
   

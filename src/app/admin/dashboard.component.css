@@ -62,20 +62,12 @@ mat-icon {
   font-size: 26px;
   cursor: pointer;
 }
-mat-nav-list {
+.test{
   background: rgb(197, 195, 195);
-  height: 1000px;
+  overflow: hidden;
+  height: 97%;
 }
 
-
-
-/* Nút trong menu */
-/* mat-menu-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-} */
 
 
 

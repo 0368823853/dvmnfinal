@@ -11,6 +11,11 @@ mat-table {
   mat-header-cell {
     padding: 8px;
   }
+
+  button[disabled] mat-icon {
+    color: #b0b0b0 !important;
+    opacity: 0.5; /* Làm mờ icon */
+  }
   
   mat-icon {
     cursor: pointer;

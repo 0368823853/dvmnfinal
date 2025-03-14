@@ -30,6 +30,7 @@ import { AssignUserDialogComponent } from './assign-user-dialog/assign-user-dial
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { DeviceDetailComponent } from './device-detail/device-detail.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { MatMenuModule } from '@angular/material/menu';
     SharedTableComponent,
     AssignUserDialogComponent,
     DashboardComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    DeviceDetailComponent
   ],
   imports: [
     CommonModule,

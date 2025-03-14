@@ -1,6 +1,6 @@
 <mat-dialog-content>
   <mat-card class="device-form-card">
-    <mat-card-title style="padding-bottom: 20px;">Device</mat-card-title>
+    <mat-card-title style="padding-bottom: 20px;">{{ isEditMode ? 'Update Device' : 'Add Device' }}</mat-card-title>
 
     <form [formGroup]="deviceForm" (ngSubmit)="submitForm()">
 
@@ -40,10 +40,10 @@
         </mat-error>
       </mat-form-field>
       <mat-dialog-actions align="end">
-        <button mat-raised-button color="primary" type="submit" [disabled]="deviceForm.invalid">
+        <button mat-button color="warn" type="button" (click)="closeDialog()">Cancel</button>
+        <button mat-raised-button color="primary" type="submit">
           {{ isEditMode ? 'Update' : 'Add' }}
         </button>
-        <button mat-button color="warn" type="button" (click)="closeDialog()">Cancel</button>
       </mat-dialog-actions>
       
 

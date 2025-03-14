@@ -22,7 +22,7 @@ export class PasswordChangeComponent {
     this.passwordForm = this.fb.group({
       oldPassword: ['', Validators.required],
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -31,14 +31,19 @@ export class PasswordChangeComponent {
       alert('Please fill in all required fields.');
       return;
     }
-
+  
     const { oldPassword, newPassword, confirmPassword } = this.passwordForm.value;
-
+  
     if (newPassword !== confirmPassword) {
       alert('New password does not match.');
       return;
     }
-
+  
+    if (oldPassword === newPassword) {
+      alert('New password must be different from the old password.');
+      return;
+    }
+  
     this.userService.updatePassword({ oldPassword, newPassword }).subscribe({
       next: () => {
         alert('Password updated successfully.');
@@ -50,6 +55,7 @@ export class PasswordChangeComponent {
       }
     });
   }
+  
 
   dialogRefClose() {
     this.dialogRef.close();

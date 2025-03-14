@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{ data.type }} Details</h2>
+<mat-dialog-content>
+  <table>
+    <tr *ngFor="let key of objectKeys(data.entity)">
+      <td><strong>{{ key | titlecase }}:</strong></td>
+      <td>{{ data.entity[key] }}</td>
+    </tr>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>

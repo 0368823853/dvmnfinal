@@ -1,6 +1,9 @@
+<div class="search-container">
+  <div class="search-group">
 <mat-label style="margin-right: 10px;">Search Device:</mat-label>
 <input matInput type="text" [(ngModel)]="searchText" placeholder="Input the device name...">
-<button mat-raised-button color="primary" (click)="searchName()">Search</button>
+<button style="background: rgb(252, 250, 250); width: 50px; margin-right: 20px;" (click)="searchName()"><mat-icon>search</mat-icon></button>
+  </div></div>
 <table *ngIf="(devices$ | async) as users; else noData">
 
   <app-shared-table

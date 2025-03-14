@@ -1,36 +1,25 @@
 .device-form-card {
-    max-width: 500px;
-    margin: auto;
-    padding: 24px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  
-  mat-form-field {
-    width: 100%;
-    margin-bottom: 16px;
-  }
-  
-  button {
-    width: 30%;
-    padding: 10px;
-    font-size: 16px;
-    margin-left: 20px;
-    margin-right: 30px;
-  }
-  mat-dialog-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px; /* Tạo khoảng cách giữa các nút */
-    padding: 16px; 
-  }
-  button {
-    min-width: 80px; 
-  }
-  
-  
+  max-width: 500px;
+  margin: auto;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+button {
+  width: 40%;
+  padding: 10px;
+  font-size: 16px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
