@@ -68,6 +68,10 @@ export class AdminAssignmentComponent implements OnInit{
   
 
   searchName() {
+    if (!this.searchText.trim()) { 
+      alert('Please enter a valid search term!'); // Hiển thị thông báo nếu chỉ nhập dấu space
+      return;
+    }   
     this.deviceAssignmentService.searchDevice(this.searchText).subscribe({
       next: (data) => {
         this.devices = data;

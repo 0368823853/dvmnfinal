@@ -28,8 +28,7 @@ export class RegisterComponent {
       this.authService.register(this.registerForm.value).subscribe({
         next: () => {
           alert('Registered successfully!');
-          this.dialogRef.close('success')
-          this.router.navigate(['/auth']); // Chuyển hướng về login
+          this.dialogRef.close('success');
         },
         error: err => alert('Registration failed: ' + err.error.message)
       });

@@ -51,13 +51,14 @@ export class DeviceListComponent implements OnInit {
       {
         name: 'Delete',
         icon: 'delete',
-        onAction: (device: Device) => this.confirmDelete(device.id)
+        onAction: (device: Device) => this.confirmDelete(device.id),
+        disabled: (device: Device) => device.deviceStatus === 'Borrowed' || device.deviceStatus === 'Returned'
       },
       {
         name: 'Assignment',
         icon: 'devices',
         onAction: (device: Device) => this.assignDeviceToUser(device.id),
-        disabled: (device: Device) => device.status === 'Inactive' // Disable khi thiết bị Inactive
+        disabled: (device: Device) => device.status === 'Inactive' || device.deviceStatus === 'Borrowed' || device.deviceStatus === 'Returned'// Disable khi thiết bị Inactive
       }
     ];
   }
@@ -81,6 +82,10 @@ export class DeviceListComponent implements OnInit {
   }
 
   searchName() {
+    if (!this.searchText.trim()) { 
+      alert('Please enter a valid search term!'); // Hiển thị thông báo nếu chỉ nhập dấu space
+      return;
+    }
     this.deviceService.searchDevice(this.searchText).subscribe({
       next: (data) => {
         this.devices = data;

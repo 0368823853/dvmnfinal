@@ -2,10 +2,10 @@
 <div class="search-container">
   <div class="search-group">
 <mat-label style="margin-right: 10px;">Search Device:</mat-label>
-<input matInput type="text" [(ngModel)]="searchText" placeholder="Input the user...">
+<input matInput type="text" [(ngModel)]="searchText" placeholder="Search by name...">
 <button style="background: rgb(252, 250, 250); width: 50px; margin-right: 20px;" (click)="searchName()"><mat-icon>search</mat-icon></button>
 
-<label for="status">Select Role:</label>
+<label for="status">Select Device:</label>
 <select id="status" [(ngModel)]="selectedStatus" (change)="filterDevicesByStatus()">
   <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
 </select>
@@ -18,7 +18,8 @@
   <app-shared-table
   [displayedColumns]="columns"
   [dataSource]="devices"
-  [cellActions]="config">
+  [cellActions]="config"
+  type="Device">
 </app-shared-table>
 </table>
 

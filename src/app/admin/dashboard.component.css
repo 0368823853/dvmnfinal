@@ -65,7 +65,12 @@ mat-icon {
 .test{
   background: rgb(197, 195, 195);
   overflow: hidden;
-  height: 97%;
+  height: calc(100vh - 64px - 16px);
+}
+
+.mat-drawer {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 
 

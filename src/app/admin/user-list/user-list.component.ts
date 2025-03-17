@@ -84,6 +84,10 @@ export class UserListComponent implements OnInit {
   }
 
   searchByName() {
+    if (!this.searchText.trim()) { 
+      alert('Please enter a valid search term!'); // Hiển thị thông báo nếu chỉ nhập dấu space
+      return;
+    }   
     this.userService.searchUser(this.searchText).subscribe({
       next: (data) => {
         this.users = data;

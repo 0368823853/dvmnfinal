@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../service/user.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -23,8 +23,35 @@ export class PasswordChangeComponent {
       oldPassword: ['', Validators.required],
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
-    });
+    },
+    {validators: this.passwordsValidator}
+  );
   }
+
+  passwordsValidator(formGroup: AbstractControl) {
+    const oldPassword = formGroup.get('oldPassword')?.value;
+    const newPassword = formGroup.get('newPassword')?.value;
+    const confirmPassword = formGroup.get('confirmPassword')?.value;
+  
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      return null; // Nếu chưa nhập đủ thì không kiểm tra
+    }
+  
+    const errors: any = {};
+  
+    // Kiểm tra newPassword và confirmPassword phải giống nhau
+    if (newPassword !== confirmPassword) {
+      errors.confirmPasswordMismatch = true;
+    }
+  
+    // Kiểm tra oldPassword và newPassword phải khác nhau
+    if (oldPassword === newPassword) {
+      errors.newPasswordSameAsOld = true;
+    }
+  
+    return Object.keys(errors).length ? errors : null;
+  }
+  
 
   updatePassword() {
     if (this.passwordForm.invalid) {

@@ -3,7 +3,15 @@
   <table>
     <tr *ngFor="let key of objectKeys(data.entity)">
       <td><strong>{{ key | titlecase }}:</strong></td>
-      <td>{{ data.entity[key] }}</td>
+      <td>
+        <ng-container *ngIf="key === 'createdAt'; else normalValue">
+          {{ data.entity[key] | date:'dd/MM/yyyy HH:mm' }}
+        </ng-container>
+        <ng-template #normalValue>
+          {{ data.entity[key] }}
+        </ng-template>
+      </td>
+      
     </tr>
   </table>
 </mat-dialog-content>

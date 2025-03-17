@@ -1,5 +1,6 @@
 export interface DeviceAssignment{
     id: string;
+    iduser: string;
     deviceName: string;
     deviceStatus: string;
     userName: string;
