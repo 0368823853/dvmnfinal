@@ -22,5 +22,17 @@ export class DeviceDetailComponent {
     return Object.keys(obj).filter(key => !['id', 'iduser', 'iddevice'].includes(key));
   }
   
-  
+  formatKey(key: string): string {
+    const keyMap: { [key: string]: string } = {
+      createdat: 'Creation Date',
+      devicestatus: 'Device Status'
+    };
+    return keyMap[key.toLowerCase()] || this.capitalizeWords(key);
+  }
+    private capitalizeWords(text: string): string {
+    return text
+      .replace(/([a-z])([A-Z])/g, '$1 $2') // Tách camelCase
+      .replace(/_/g, ' ') // Thay thế dấu gạch dưới bằng khoảng trắng
+      .replace(/\b\w/g, char => char.toUpperCase()); // Viết hoa chữ cái đầu
+  }
 }

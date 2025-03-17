@@ -85,7 +85,7 @@ export class DeviceListComponent implements OnInit {
     if (!this.searchText.trim()) { 
       alert('Please enter a valid search term!'); // Hiển thị thông báo nếu chỉ nhập dấu space
       return;
-    }
+    }    
     this.deviceService.searchDevice(this.searchText).subscribe({
       next: (data) => {
         this.devices = data;
