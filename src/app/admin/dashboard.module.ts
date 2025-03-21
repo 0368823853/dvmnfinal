@@ -31,7 +31,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { DeviceDetailComponent } from './device-detail/device-detail.component';
-
+import { MyLeaveComponent } from './user/my-leave/my-leave.component';
+import { AdminLeaveComponent } from './admin-leave/admin-leave.component';
+import { LeaveDialogComponent } from './user/leave-dialog/leave-dialog.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MyAttendanceComponent } from './user/my-attendance/my-attendance.component';
+import { AdminAttendanceComponent } from './admin-attendance/admin-attendance.component';
+import { MySalaryComponent } from './user/my-salary/my-salary.component';
+import { AdminSalaryComponent } from './admin-salary/admin-salary.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +55,14 @@ import { DeviceDetailComponent } from './device-detail/device-detail.component';
     AssignUserDialogComponent,
     DashboardComponent,
     AdminDashboardComponent,
-    DeviceDetailComponent
+    DeviceDetailComponent,
+    MyLeaveComponent,
+    AdminLeaveComponent,
+    LeaveDialogComponent,
+    MyAttendanceComponent,
+    AdminAttendanceComponent,
+    MySalaryComponent,
+    AdminSalaryComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +84,9 @@ import { DeviceDetailComponent } from './device-detail/device-detail.component';
     MatDialogModule,
     MatIconButton,
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ]
 })
 export class DashboardModule { }

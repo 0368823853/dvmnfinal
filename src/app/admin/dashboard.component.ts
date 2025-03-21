@@ -21,7 +21,13 @@ export class AdminComponent implements OnInit{
     { title: 'Device Management', icon: 'devices', route: 'dashboard/devices', roles: ['ROLE_ADMIN'] },
     { title: 'User Management', icon: 'person', route: 'dashboard/user-management', roles: ['ROLE_ADMIN'] },
     { title: 'Device Assignment', icon: 'assignment', route: 'dashboard/admin-assignment', roles: ['ROLE_ADMIN'] },
-    { title: 'My Device', icon: 'inventory', route: 'dashboard/my-device', roles: ['ROLE_USER']}
+    { title: 'My Device', icon: 'inventory', route: 'dashboard/my-device', roles: ['ROLE_USER']},
+    { title: 'My Leave', icon: 'note_add', route: 'dashboard/my-leave', roles: ['ROLE_USER']},
+    { title: 'Leave Management', icon: 'note_add', route: 'dashboard/admin-leave', roles: ['ROLE_ADMIN']},
+    { title: 'My Attendance', icon: 'note_add', route: 'dashboard/my-attendance', roles: ['ROLE_USER']},
+    { title: 'Attendance Management', icon: 'note_add', route: 'dashboard/admin-attendance', roles: ['ROLE_ADMIN']},
+    { title: 'My Salary', icon: 'note_add', route: 'dashboard/my-salary', roles: ['ROLE_USER']},
+    { title: 'Salary Management', icon: 'note_add', route: 'dashboard/admin-salary', roles: ['ROLE_ADMIN']},
   ];
 
   constructor(private router: Router, private authService: AuthService, private dialog: MatDialog) {

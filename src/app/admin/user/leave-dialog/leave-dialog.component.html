@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Xin nghỉ phép</h2>
+<form [formGroup]="leaveForm" (ngSubmit)="submitLeave()" class="leave-form">
+  <mat-form-field appearance="outline">
+    <mat-label>Ngày bắt đầu</mat-label>
+    <input matInput [matDatepicker]="startPicker" formControlName="startDate" required>
+    <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+    <mat-datepicker #startPicker></mat-datepicker>
+    <mat-error *ngIf="leaveForm.get('startDate')?.invalid">Vui lòng chọn ngày bắt đầu</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Ngày kết thúc</mat-label>
+    <input matInput [matDatepicker]="endPicker" formControlName="endDate" required>
+    <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+    <mat-datepicker #endPicker></mat-datepicker>
+    <mat-error *ngIf="leaveForm.get('endDate')?.invalid">Vui lòng chọn ngày kết thúc</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Lý do nghỉ phép</mat-label>
+    <textarea matInput formControlName="reason" rows="3"></textarea>
+    <mat-error *ngIf="leaveForm.get('reason')?.invalid">Vui lòng nhập lý do</mat-error>
+  </mat-form-field>
+
+  <div class="button-group">
+    <button mat-button color="warn" (click)="closeDialog()">Hủy</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="leaveForm.invalid">Gửi yêu cầu</button>
+  </div>
+</form>

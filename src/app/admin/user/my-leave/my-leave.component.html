@@ -1,0 +1,13 @@
+<button style="border: 1px solid #cccaca; margin-right: 30px;" color="primary" (click)="addLeaveRequest()">Add Leave</button>
+
+<table *ngIf="(leaves$ | async) as users; else noData">
+    <app-shared-table
+    [displayedColumns]="columns"
+    [dataSource]="leaves"
+    [cellActions]="config"
+    >
+    </app-shared-table>
+</table>
+<ng-template #noData>
+    <p>User NotFound</p>
+</ng-template>

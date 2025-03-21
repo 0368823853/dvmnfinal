@@ -1,0 +1,23 @@
+<div class="filter-container">
+<label for="startDate">Từ ngày:</label>
+<input type="date" id="startDate" [(ngModel)]="startDate">
+
+<label for="endDate">Đến ngày:</label>
+<input type="date" id="endDate" [(ngModel)]="endDate">
+
+<button (click)="filterAttendance()">Lọc</button>
+
+<button mat-button color="primary" (click)="onCheckIn()">Chấm công vào</button>
+<button mat-button color="warn" (click)="onCheckOut()">Chấm công ra</button>
+</div>
+
+<table *ngIf="(attendances$ | async) as users; else noData">
+    <app-shared-table
+    [displayedColumns]="columns"
+    [dataSource]="attendances"
+    >
+    </app-shared-table>
+</table>
+<ng-template #noData>
+    <p>User NotFound</p>
+</ng-template>

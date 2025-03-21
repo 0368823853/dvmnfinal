@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { Observable, take, tap } from 'rxjs';
@@ -39,16 +39,38 @@ export class AuthService {
   }
 
   getCurrentUser(): any {
-    const token = localStorage.getItem('currentUser');
+    const token = this.getToken(); // ✅ Dùng `this.getToken()` thay vì `localStorage.getItem('currentUser')`
     if (!token) return null;
   
     try {
-      const decoded: any = jwtDecode(token); // Giải mã token
-      return { username: decoded.sub, role: decoded.role };
+      const decoded: any = jwtDecode(token);
+      return { id: decoded.id, username: decoded.sub, role: decoded.role };
     } catch (error) {
+      console.error("Lỗi giải mã token:", error);
       return null;
     }
   }
+  
+  
+  
+  getCurrentUserId(): string | null {
+    return this.getCurrentUser()?.id || null; // Chỉ lấy `id`
+  }
+  
+
+  getCurrentUsers(): Observable<any> {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('jwtToken')}`
+    );
+    return this.http.get(`${AppConstants.apiUrl}/me`, {headers});
+  }
+
+  getUserId(): string | null {
+    const user = localStorage.getItem('user'); 
+    return user ? JSON.parse(user).id : null; // Trả về userId thay vì object
+  }
+  
   
 
   isAdmin(): boolean{

@@ -1,0 +1,17 @@
+<div class="filter-container">
+<mat-label style="margin-right: 10px;">Search Device:</mat-label>
+<input matInput type="text" [(ngModel)]="searchText" placeholder="Search by name...">
+<button style="background: rgb(252, 250, 250); width: 50px; margin-right: 20px;" (click)="searchName()"><mat-icon>search</mat-icon></button>
+</div>
+
+<table *ngIf="(leaves$ | async) as users; else noData">
+    <app-shared-table
+    [displayedColumns]="colums"
+    [dataSource]="leaves"
+    [cellActions]="config"
+    >
+    </app-shared-table>
+</table>
+<ng-template #noData>
+    <p>User NotFound</p>
+</ng-template>

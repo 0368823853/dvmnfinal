@@ -1,0 +1,10 @@
+<table *ngIf="(salarys$ | async) as users; else noData">
+    <app-shared-table
+    [displayedColumns]="colums"
+    [dataSource]="salarys"
+    >
+    </app-shared-table>
+</table>
+<ng-template #noData>
+    <p>User NotFound</p>
+</ng-template>

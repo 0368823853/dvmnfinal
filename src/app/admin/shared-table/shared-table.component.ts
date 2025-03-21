@@ -27,7 +27,9 @@ export class SharedTableComponent implements OnInit{
   columnHeaders: { [key: string]: string } = {
     username: 'UserName',role: 'Role', fullname: 'FullName', email: 'Email' ,createdAt: 'Creation Date',
     deviceName: 'Device Name', deviceStatus: 'Device Status', confirmAt: 'Confirm Date', status: 'Status',
-    name: 'Device Name', description: 'Description', userName:'User Name'
+    name: 'Device Name', description: 'Description', userName:'User Name', startDate: 'Start Date', endDate:'End Date', reason: 'Reason',
+    checkIn: 'Check In', checkOut: 'Check Out', workHours: 'Work Hours', totalHours: 'totalHours',totalSalary:'totalSalary',baseSalary: 'baseSalary',
+    year: 'Year', month: 'Month', overtimeHours:'overtimeHours', overtimePay:'overtimePay'
   };
   extendedColumns: string[] = [];
   constructor(private dialog: MatDialog) {}

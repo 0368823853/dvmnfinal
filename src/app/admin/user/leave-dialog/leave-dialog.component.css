@@ -1,0 +1,17 @@
+.leave-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  

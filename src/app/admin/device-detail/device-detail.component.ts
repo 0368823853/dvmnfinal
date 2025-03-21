@@ -19,7 +19,7 @@ export class DeviceDetailComponent {
     this.dialogRef.close();
   }
   objectKeys(obj: any): string[] {
-    return Object.keys(obj).filter(key => !['id', 'iduser', 'iddevice'].includes(key));
+    return Object.keys(obj).filter(key => !['id', 'iduser', 'iddevice', 'userId'].includes(key));
   }
   
   formatKey(key: string): string {

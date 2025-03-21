@@ -1,0 +1,41 @@
+<h2>Quản lý lương nhân viên</h2>
+
+<div>
+  <label>Mã nhân viên:</label>
+  <input type="text" [(ngModel)]="userId" />
+</div>
+
+<div>
+  <label>Ngày bắt đầu:</label>
+  <input type="date" [(ngModel)]="startDate" />
+</div>
+
+<div>
+  <label>Ngày kết thúc:</label>
+  <input type="date" [(ngModel)]="endDate" />
+</div>
+
+<button (click)="calculateSalary()">Tính lương</button>
+
+<div *ngIf="calculatedSalary">
+  <h3>Kết quả tính lương</h3>
+  <p><strong>Nhân viên:</strong> {{ calculatedSalary.userName }}</p>
+  <p><strong>Lương cơ bản:</strong> {{ calculatedSalary.baseSalary | currency:'VND' }}</p>
+  <p><strong>Giờ làm thêm:</strong> {{ calculatedSalary.overtimeHours }}</p>
+  <p><strong>Tiền làm thêm:</strong> {{ calculatedSalary.overtimePay | currency:'VND' }}</p>
+  <p><strong>Tổng lương:</strong> {{ calculatedSalary.totalSalary | currency:'VND' }}</p>
+
+  <button (click)="confirmSalary()">Xác nhận & lưu lương</button>
+</div>
+
+<p *ngIf="message">{{ message }}</p>
+<table *ngIf="(salarys$ | async) as users; else noData">
+    <app-shared-table
+    [displayedColumns]="colums"
+    [dataSource]="salarys"
+    >
+    </app-shared-table>
+</table>
+<ng-template #noData>
+    <p>User NotFound</p>
+</ng-template>
