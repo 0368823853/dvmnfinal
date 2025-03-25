@@ -1,2 +1,78 @@
-<p>Welcome to Device Management System</p>
-<img src="assets/anh2.png">
+<mat-toolbar color="primary">
+  <span>Dashboard Thống Kê</span>
+</mat-toolbar>
+
+<div class="dashboard-wrapper">
+  <!-- Chứa toàn bộ báo cáo thống kê -->
+  <div class="dashboard-container">
+    <!-- Thống kê thiết bị -->
+    <div class="report-section">
+      <h2>Thống kê Thiết Bị</h2>
+      <div class="stats-grid">
+        <mat-card class="stat-card total">
+          <h3>Tổng số thiết bị</h3>
+          <p>{{ statistics.totalDevices || 0 }}</p>
+        </mat-card>
+        <mat-card class="stat-card active">
+          <h3>Thiết bị đang hoạt động</h3>
+          <p>{{ statistics.activeDevices || 0 }}</p>
+        </mat-card>
+        <mat-card class="stat-card inactive">
+          <h3>Thiết bị không hoạt động</h3>
+          <p>{{ statistics.inactiveDevices || 0 }}</p>
+        </mat-card>
+      </div>
+      <div class="chart-container">
+        <canvas id="deviceChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Thống kê user -->
+    <div class="report-section">
+      <h2>Thống kê Người Dùng</h2>
+      <div class="stats-grid">
+        <mat-card class="stat-card total-users">
+          <h3>Tổng User</h3>
+          <p>{{ userStats.totalUsers || 0 }}</p>
+        </mat-card>
+        <mat-card class="stat-card total-users">
+          <h3>User Thông Thường</h3>
+          <p>{{ userStats.Users || 0 }}</p>
+        </mat-card>
+        <mat-card class="stat-card total-admins">
+          <h3>Tổng Admin</h3>
+          <p>{{ userStats.Admin || 0 }}</p>
+        </mat-card>
+      </div>
+      <div class="chart-container">
+        <canvas id="userChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Thống kê nghỉ phép -->
+    <div class="report-section">
+      <h2>Thống kê Nghỉ Phép</h2>
+      <div class="stats-grid">
+        <mat-card class="stat-card total-users">
+          <h3>Tổng Leave</h3>
+          <p>{{ leaveStats.totalLeave || 0 }}</p>
+        </mat-card>
+        <mat-card class="stat-card total-users">
+          <h3>Đã duyệt</h3>
+          <p>{{ leaveStats.Approved || 0 }}</p>
+        </mat-card>
+        <mat-card class="stat-card total-admins">
+          <h3>Từ chối</h3>
+          <p>{{ leaveStats.Rejected || 0 }}</p>
+        </mat-card>
+        <mat-card class="stat-card total-admins">
+          <h3>Đang chờ</h3>
+          <p>{{ leaveStats.Pending || 0 }}</p>
+        </mat-card>
+      </div>
+      <div class="chart-container">
+        <canvas id="leaveChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

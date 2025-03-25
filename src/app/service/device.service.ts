@@ -58,4 +58,8 @@ export class DeviceService {
   assignDevice(deviceId: string, userId: string):Observable<string>{
     return this.http.post<string>(`${AppConstants.apiUrl}/assignment/${deviceId}/assign/${userId}`,{}, {headers: this.getAuthHeaders()});
   }
+
+  getDeviceStatistics(): Observable<any> {
+    return this.http.get<any>(`${AppConstants.apiUrl}/statistics`, {headers: this.getAuthHeaders()});
+  }
 }

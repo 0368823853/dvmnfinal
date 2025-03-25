@@ -58,6 +58,7 @@ confirmSalary() {
       (res) => {  
         this.message = res; 
         alert('Lương đã được lưu!'); 
+        this.loadLeave();
       },
       (error) => { 
         alert('Lỗi khi lưu lương: ' + error.message); 

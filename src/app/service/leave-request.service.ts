@@ -47,4 +47,8 @@ export class LeaveRequestService {
   deleteLeaveRequestByAdmin(leaveRequestId: string): Observable<any> {
     return this.http.delete(`${AppConstants.apiUrl}/leave/${leaveRequestId}/admin`, {headers: this.getAuthHeaders()});
   }
+
+  getLeaveStatistics(): Observable<any> {
+    return this.http.get<any>(`${AppConstants.apiUrl}/leave/repostLeave`, {headers: this.getAuthHeaders()});
+  }
 }

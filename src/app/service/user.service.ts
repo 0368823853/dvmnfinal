@@ -45,4 +45,7 @@ export class UserService {
   updatePassword(data:{oldPassword: string; newPassword: string}){
     return this.http.put(`${AppConstants.apiUrl}/user/updatePassword`, data, {headers: this.getAuthHeaders()});
   }
+  getUserStatistics(): Observable<any> {
+    return this.http.get<any>(`${AppConstants.apiUrl}/repost`, {headers: this.getAuthHeaders()});
+  }
 }
